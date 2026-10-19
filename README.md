@@ -164,9 +164,6 @@ RAG-grounded AI assistant that cites exact Acts and sections · e-Judiciary inte
 |---|
 | Rahid Karim |
 | [Ahnaf Shahriar](https://github.com/splashahnaf445) |
-| Sk. Istiaq Arefin |
-| Nafseen Hossain |
-| Sumaiya Akther |
 | Rifa Sanjida |
 | Shafiul Alam |
 
