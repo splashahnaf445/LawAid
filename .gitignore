@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Next.js build output
+.next/
+out/
+dist/
+build/
+
+# Environment variables & secrets (CRITICAL per course guidelines)
+.env
+.env.*
+!.env.example
+
+# Logs & OS files
+npm-debug.log*
+.DS_Store
+Thumbs.db
