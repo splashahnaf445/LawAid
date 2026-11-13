@@ -1,0 +1,204 @@
+/* Styles used only by client/find-lawyers.html */
+
+.fh {
+  padding: 70px 40px 60px;
+  background: linear-gradient(90deg,#0a1a33cc,#0a1a3366),url(../../img/hero/law-books-scales.jpg) center/cover;
+  color: #fff;
+}
+
+.fh h1 {
+  font: 700 32px Georgia,serif;
+  margin: 0 0 6px;
+  padding-left: 36%;
+}
+
+.fh p {
+  margin: 0;
+  padding-left: 36%;
+  color: #e2e8f0;
+}
+
+.fb {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 30px 16px;
+}
+
+.sb {
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 10px;
+  padding: 10px;
+  align-items: center;
+  margin: 8px 0 14px;
+}
+
+.sb input {
+  border: 0;
+  flex: 1;
+  color: #14213d;
+  background: #fff;
+}
+
+.fl {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.fl .g5 {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.fl select {
+  background: #f1f5f9;
+  color: #14213d;
+  border-color: #e2e6f0;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.fl .sub {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  align-items: center;
+}
+
+.fl .sub .y {
+  background: #f59e0b;
+  border-radius: 4px;
+  padding: 1px 8px;
+  font-weight: 600;
+}
+
+.lr {
+  display: grid;
+  grid-template-columns: 90px 1fr 270px;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.lr img,
+.lr .tr {
+  width: 66px;
+  height: 66px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.lr .tr {
+  background: #0a1a33;
+  color: #f59e0b;
+  display: grid;
+  place-items: center;
+  font: 700 22px Georgia,serif;
+}
+
+.lr h3 {
+  margin: 0;
+  font-size: 20px;
+  display: inline;
+}
+
+.lr .id {
+  font: 600 10px monospace;
+  background: #eef2fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.lr .tg span {
+  display: inline-block;
+  background: #eef2fa;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  margin: 6px 4px 0 0;
+}
+
+.lr .sl {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 11px;
+}
+
+.lr .sl .row {
+  margin: 4px 0;
+}
+
+.lr .sl b.f {
+  font-size: 20px;
+}
+
+.lr .bt {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.lr .bt a {
+  text-align: center;
+  background: #fff;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.lr .bt a.b {
+  background: #f59e0b;
+  font-weight: 700;
+}
+
+.ai-r {
+  background: #fde68a;
+  border-radius: 99px;
+  padding: 2px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.pg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.pg b {
+  background: #f59e0b;
+  padding: 1px 7px;
+  border-radius: 4px;
+}
+
+@media (max-width:860px) {
+  .fl .g5,
+  .lr {
+    grid-template-columns: 1fr;
+  }
+  .fh h1,
+  .fh p {
+    padding-left: 0;
+  }
+}

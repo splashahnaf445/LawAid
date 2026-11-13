@@ -1,0 +1,418 @@
+/* Styles used only by lawyer/documents.html */
+
+.dhero {
+  background: #08142a;
+  padding: 40px 40px 30px;
+}
+
+.dhero h1 {
+  margin: 0;
+  font-size: 34px;
+}
+
+.dhero p {
+  margin: 4px 0 0;
+  font-size: 20px;
+  color: #aab6cc;
+}
+
+.dstats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+  margin-top: 40px;
+  border-top: 1px solid #1e2a44;
+  padding-top: 26px;
+}
+
+.dstats div {
+  background: #0f1a30;
+  border: 1px solid #1e2a44;
+  border-radius: 10px;
+  padding: 14px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.dstats b {
+  display: block;
+  font-size: 24px;
+}
+
+.dbody {
+  background: #f8fafc;
+  color: #14213d;
+  padding: 30px 24px 50px;
+}
+
+.dbody .in {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dtab {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dtab a {
+  background: #fff;
+  border: 1px solid #d5dbe8;
+  border-radius: 99px;
+  padding: 3px 14px;
+  font-size: 13px;
+}
+
+.dtab a.on {
+  background: #e8a13a;
+  font-weight: 700;
+  border-color: #e8a13a;
+}
+
+.dtab input {
+  width: 240px;
+  margin-left: auto;
+  background: #fff;
+  color: #14213d;
+  border-color: #d5dbe8;
+}
+
+.dq {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 10px;
+}
+
+.dq .h {
+  padding: 14px 18px;
+  font-weight: 700;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.dr {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid #eef1f6;
+  flex-wrap: wrap;
+}
+
+.dr .ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid;
+  display: grid;
+  place-items: center;
+  font: 700 10px/1.1 Inter,sans-serif;
+  text-align: center;
+}
+
+.dr .t1 {
+  flex: 1;
+  min-width: 240px;
+}
+
+.dr small {
+  color: #64748b;
+}
+
+.dr .btn {
+  background: #fff;
+  color: #14213d;
+  border-color: #d5dbe8;
+  font-size: 12px;
+  padding: 5px 12px;
+}
+
+.dr .btn.k {
+  background: #0a1a33;
+  color: #fff;
+}
+
+.dr .btn.rd {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.dft {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.dmb {
+  max-width: 480px;
+  margin: 20px auto;
+  background: #0b1e38;
+  border: 1px solid #1f3454;
+  border-radius: 16px;
+  color: #e8eefb;
+  box-shadow: 0 20px 50px #0008;
+}
+
+.dmb .mh {
+  border-bottom: 1px solid #1f3454;
+  padding: 16px 20px;
+}
+
+.dmb .ib {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #f59e0b22;
+  border: 1px solid #f59e0b55;
+  margin-right: 12px;
+}
+
+.dmb .mbd {
+  padding: 6px 20px 14px;
+}
+
+.dmb h5 {
+  margin: 16px 0 8px;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: #9fb0cc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dmb h5 em {
+  font-style: normal;
+  color: #f59e0b;
+  font-size: 10px;
+}
+
+.dmb label {
+  color: #e8eefb;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 12px 0 6px;
+}
+
+.dmb input {
+  background: #0a1627;
+  border-color: #1f3454;
+}
+
+.dmb .sg {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  background: #0a1627;
+  border: 1px solid #1f3454;
+  border-radius: 10px;
+  padding: 3px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dmb .sg span {
+  padding: 6px;
+}
+
+.dmb .sg span.on {
+  background: #e89c2a;
+  color: #111;
+  border-radius: 8px;
+}
+
+.dmb .ck3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0a1627;
+  border: 1px solid #1f3454;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.dmb .ck3 i {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid #475569;
+  font-style: normal;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+}
+
+.dmb .ck3 i.y {
+  background: #e89c2a;
+  border-color: #e89c2a;
+  color: #111;
+}
+
+.dmb .ck3 em {
+  margin-left: auto;
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 99px;
+  padding: 1px 8px;
+  border: 1px solid;
+}
+
+.dmb .u {
+  color: #fb7185;
+  background: #fb718522;
+}
+
+.dmb .m {
+  color: #fbbf24;
+  background: #fbbf2422;
+}
+
+.dmb .s {
+  color: #94a3b8;
+  background: #94a3b822;
+}
+
+.dmb .add {
+  border: 1px dashed #334155;
+  border-radius: 8px;
+  text-align: center;
+  padding: 9px;
+  font-size: 12px;
+  color: #9fb0cc;
+}
+
+.dmb .sw {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0a1627;
+  border: 1px solid #1f3454;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dmb .sw b {
+  margin-left: auto;
+  width: 36px;
+  height: 20px;
+  border-radius: 99px;
+  background: #e89c2a;
+  position: relative;
+}
+
+.dmb .sw b:after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.dmb .mf2 {
+  display: flex;
+  gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid #1f3454;
+  justify-content: space-between;
+}
+
+.dmb .mf2 a {
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid #1f3454;
+  background: #0a1627;
+  text-align: center;
+}
+
+.dmb .mf2 a.go {
+  background: #e89c2a;
+  color: #111;
+  border: 0;
+}
+
+.dmb .chips span {
+  display: inline-block;
+  border: 1px solid #334155;
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 12px;
+  margin: 0 4px 6px 0;
+  background: #0a1627;
+}
+
+.dmb .chips span.on {
+  border-color: #e89c2a;
+  color: #e89c2a;
+}
+
+.dmb .dz2 {
+  border: 1px dashed #334155;
+  border-radius: 10px;
+  text-align: center;
+  padding: 22px;
+  font-size: 11px;
+  color: #9fb0cc;
+}
+
+.dmb .dz2 b {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+}
+
+.dmb .fb2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0a1627;
+  border: 1px solid #1f3454;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.dmb .fb2 i {
+  font-style: normal;
+  background: #7f1d1d;
+  color: #fca5a5;
+  font-size: 8px;
+  padding: 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.dok {
+  max-width: 360px;
+  margin: 150px auto 0;
+  background: #0b1e38;
+  border: 1px solid #1f3454;
+  border-radius: 16px;
+  padding: 34px 26px;
+  text-align: center;
+}
+
+.dok .big {
+  margin-bottom: 12px;
+}
+
+.dok a.btn {
+  margin-top: 6px;
+}

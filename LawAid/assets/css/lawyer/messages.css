@@ -1,0 +1,97 @@
+/* Styles used only by lawyer/messages.html */
+
+.msgs {
+  background: #e9edf4;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 20px;
+  box-shadow: 0 6px 18px #0006;
+}
+
+.msgs .tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.msgs .tabs a {
+  background: #fff;
+  color: #14213d;
+  border-radius: 99px;
+  padding: 3px 14px;
+  font-size: 13px;
+}
+
+.msgs .tabs a.on {
+  background: #fbbf24;
+  font-weight: 700;
+}
+
+.chat {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  background: #fff;
+  color: #14213d;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 430px;
+}
+
+.chat aside {
+  border-right: 1px solid #e2e6f0;
+}
+
+.chat aside div {
+  padding: 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.chat aside div.on {
+  background: #fff6d6;
+  border-left: 3px solid #f59e0b;
+}
+
+.chat aside small {
+  display: block;
+  color: #64748b;
+}
+
+.bub {
+  max-width: 70%;
+  padding: 10px 16px;
+  border-radius: 99px;
+  margin: 10px 16px 2px auto;
+  background: #d97706;
+  color: #fff;
+  width: fit-content;
+  font-size: 14px;
+}
+
+.bub.l {
+  background: #fff;
+  color: #14213d;
+  border: 1px solid #e2e6f0;
+  margin: 10px auto 2px 16px;
+}
+
+.tm2 {
+  font-size: 11px;
+  color: #94a3b8;
+  margin: 0 16px;
+  text-align: right;
+}
+
+.tm2.l {
+  text-align: left;
+}
+
+.cin {
+  margin: 14px 16px;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 12px;
+  color: #94a3b8;
+  background: #f8fafc;
+}

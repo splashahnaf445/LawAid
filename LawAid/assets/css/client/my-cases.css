@@ -1,0 +1,226 @@
+/* Styles used only by client/my-cases.html */
+
+.mh2 {
+  padding: 50px 20px 110px;
+  background: linear-gradient(90deg,#0a1a33cc 40%,#0a1a3300),url(../../img/hero/messages-banner.jpg) right/cover;
+  color: #fff;
+}
+
+.mh2 h1 {
+  font: 700 30px Georgia,serif;
+  color: #f59e0b;
+  margin: 0 0 6px;
+}
+
+.mh2 p {
+  max-width: 430px;
+  margin: 0;
+}
+
+.mw {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 16px;
+}
+
+.mt4 {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.mt4 .cc2 b.n {
+  font-size: 30px;
+  margin: 10px 0 0;
+}
+
+.mt4 small {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+.mg {
+  display: grid;
+  grid-template-columns: 1.9fr 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.cs2 {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.cs2.hot {
+  border: 2px solid #f59e0b;
+}
+
+.cs2 .tg {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #d97706;
+  color: #fff;
+  font-size: 9px;
+  padding: 2px 10px;
+  font-weight: 700;
+}
+
+.cs2 .lead {
+  background: #f8fafc;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 12px 0;
+  font-size: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.cs2 .lead i {
+  font-style: normal;
+  background: #fde68a;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.ms {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0;
+  font-size: 9px;
+  text-align: center;
+  color: #64748b;
+}
+
+.ms span {
+  display: block;
+  width: 100%;
+}
+
+.ms .c {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f59e0b;
+  color: #fff;
+  display: inline-grid;
+  place-items: center;
+  font-size: 10px;
+}
+
+.ms .c.n {
+  background: #e2e6f0;
+  color: #64748b;
+}
+
+.ms hr {
+  flex: 1;
+  border: 0;
+  height: 3px;
+  background: #f59e0b;
+  margin: 0 4px 12px;
+}
+
+.ms hr.n {
+  background: #e2e6f0;
+}
+
+.ms div {
+  width: 70px;
+}
+
+.bd {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  margin: 12px 0;
+}
+
+.bd span {
+  flex: 1;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.bd span.a {
+  background: #0ea5e9;
+  color: #fff;
+}
+
+.bd span.f {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e6f0;
+}
+
+.cs2 .ac {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  border-top: 1px solid #eef1f6;
+  padding-top: 12px;
+}
+
+.cs2 .ac a {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 5px;
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+.cs2 .ac a.k {
+  background: #0a1a33;
+  color: #fff;
+}
+
+.cs2 .ac a.y {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #c2410c;
+}
+
+.rp {
+  background: #f8fafc;
+  border: 1px solid #e2e6f0;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 12px;
+}
+
+.rp a {
+  display: block;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  color: #c2410c;
+  border-radius: 4px;
+  padding: 4px;
+  margin-top: 8px;
+}
+
+@media (max-width:860px) {
+  .mt4,
+  .mg {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,36 @@
+/* Styles used only by lawyer/register-3-security.html */
+
+.str {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 6px;
+  margin: 6px 0;
+}
+
+.str i {
+  height: 3px;
+  background: #10b981;
+  border-radius: 9px;
+}
+
+.str i.n {
+  background: #334155;
+}
+
+.ck {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  margin: 14px 0;
+  align-items: flex-start;
+}
+
+.ck input {
+  width: auto;
+  accent-color: #f59e0b;
+  margin-top: 3px;
+}
+
+.ck a {
+  color: #f59e0b;
+}

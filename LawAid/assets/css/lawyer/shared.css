@@ -1,0 +1,490 @@
+/* Lawyer portal – components shared by several lawyer pages */
+
+.av {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0f766e;
+  font-size: 12px;
+}
+
+.hero {
+  padding: 70px 40px;
+  background: linear-gradient(90deg,#0a1a33 35%,#0a1a3300),#0a1a33 center/cover;
+}
+
+.hero.img {
+  background: linear-gradient(90deg,#0a1a33 30%,#0a1a3300),url(../../img/hero/law-books-scales.jpg) right/cover no-repeat;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 40px;
+}
+
+.hero em {
+  font-style: normal;
+  color: var(--amber);
+}
+
+.hero p {
+  margin: 0 0 24px;
+}
+
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 28px 24px;
+}
+
+.g3 {
+  grid-template-columns: repeat(3,1fr);
+}
+
+.g4 {
+  grid-template-columns: repeat(4,1fr);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.stat b {
+  display: block;
+  font-size: 34px;
+  color: var(--amber);
+}
+
+.stat small {
+  font-size: 13px;
+}
+
+.pill.p {
+  background: #8b5cf622;
+  color: #c4b5fd;
+}
+
+.mh,
+.mf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  gap: 10px;
+}
+
+.mf {
+  justify-content: flex-end;
+}
+
+.big {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  background: #34d39922;
+  color: var(--ok);
+}
+
+.big.y {
+  background: #f59e0b22;
+  color: var(--amber);
+}
+
+.seg {
+  display: flex;
+  gap: 4px;
+}
+
+.seg a {
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.seg a.on {
+  background: #fff;
+  color: #0a1a33;
+}
+
+.notif {
+  background: #fff;
+  color: #14213d;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.notif div {
+  background: #f3f5fa;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 13px;
+}
+
+.notif small {
+  display: block;
+}
+
+.hero.s {
+  padding: 60px 40px 50px;
+  background: linear-gradient(90deg,#0a1a33 40%,#0a1a3300),url(../../img/hero/law-books-scales.jpg) right/cover;
+}
+
+.hero.s h1 {
+  font-family: Roboto,Inter,sans-serif;
+}
+
+.hero.s .pill {
+  background: #fff;
+  color: #047857;
+}
+
+.act {
+  background: #fbbf24;
+  color: #14213d;
+  margin-top: 40px;
+  padding: 6px 10px;
+  font-weight: 700;
+}
+
+.act h4 {
+  margin: 0;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.hero.t2 {
+  background: linear-gradient(90deg,#0a1a33 45%,#0a1a3399),url(../../img/hero/law-books-scales.jpg) right/cover;
+}
+
+.hero h1+p {
+  font-size: 20px;
+}
+
+.lt {
+  background: #fff;
+  color: #14213d;
+  border: 1px solid #e2e6f0;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.lt small {
+  color: #64748b;
+}
+
+@media (max-width:860px) {
+  .dt,
+  .two,
+  .chat {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero.c {
+  padding: 50px 40px 40px;
+  background: linear-gradient(90deg,#0a1a33 45%,#0a1a3355),url(../../img/hero/law-books-scales.jpg) right/cover;
+}
+
+.hero.c h1 {
+  font-size: 34px;
+}
+
+.hero.c small {
+  color: #fff;
+  font-size: 13px;
+}
+
+.gn {
+  color: #047857;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.rr {
+  color: #be123c;
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+@media (max-width:860px) {
+  .cats,
+  .clist,
+  .cn,
+  .dstats,
+  .itiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stp {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.stp .d {
+  color: #34d399;
+}
+
+.stp .c {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.stp i {
+  font-style: normal;
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #475569;
+  font-size: 10px;
+  margin-right: 6px;
+}
+
+.stp .c i {
+  background: #f59e0b;
+  color: #111;
+  border-color: #f59e0b;
+}
+
+.stp .d i {
+  border-color: #34d399;
+}
+
+.pb2 {
+  height: 5px;
+  background: #1e293b;
+  border-radius: 9px;
+  margin-bottom: 26px;
+}
+
+.pb2 i {
+  display: block;
+  height: 100%;
+  background: #f59e0b;
+  border-radius: 9px;
+}
+
+.lbox h2.rg {
+  font-size: 22px;
+}
+
+.lbox .fg {
+  font-size: 11px;
+  color: var(--mut);
+  margin-top: 4px;
+}
+
+.lbox label.k {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.btr {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btr a.bk2 {
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #0c1220;
+}
+
+.btr .btn {
+  flex: 1;
+  margin: 0;
+  box-shadow: none;
+}
+
+.okb {
+  max-width: 210px;
+  margin: 230px auto 0;
+  background: #eff6ff;
+  color: #0a1a33;
+  border-radius: 18px;
+  padding: 22px 20px;
+  text-align: center;
+}
+
+.okb h3 {
+  margin: 8px 0 16px;
+}
+
+.okb a {
+  display: block;
+  background: #0a1a33;
+  color: #fff;
+  border-radius: 8px;
+  padding: 9px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.okb .ck2 {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #0a1a33;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  font-weight: 800;
+}
+
+.lm {
+  max-width: 780px;
+  margin: 60px auto;
+  background: #fff;
+  color: #14213d;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lm .lh {
+  background: #0f1a2e;
+  color: #fff;
+  padding: 20px 26px;
+  display: flex;
+  justify-content: space-between;
+  font: 700 22px Inter,sans-serif;
+}
+
+.lm .lb {
+  padding: 24px 26px;
+  display: grid;
+  gap: 14px;
+}
+
+.lm label {
+  color: #334155;
+  font-weight: 600;
+}
+
+.lm label i {
+  color: #e11d48;
+  font-style: normal;
+}
+
+.lm input,
+.lm select {
+  background: #f8fafc;
+  color: #14213d;
+  border-color: #e2e6f0;
+}
+
+.lm .pf {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  background: #b0bccf;
+  border: 1px solid #0a1a33;
+  border-radius: 10px;
+  padding: 22px;
+  position: relative;
+}
+
+.lm .pf img {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.lm .pf .act {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  border: 1px solid #a7f3d0;
+  background: #ecfdf5;
+}
+
+.lm .pf p {
+  margin: 6px 0;
+}
+
+.lm .g2c {
+  grid-template-columns: 1fr 1fr;
+}
+
+.lm .lf {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 26px;
+  border-top: 1px solid #e2e6f0;
+}
+
+.lm.ok2 {
+  max-width: 380px;
+  text-align: center;
+  padding: 26px;
+  margin-top: 200px;
+}
+
+.lm.ok2 .ckg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #34d399;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 8px;
+  font-weight: 800;
+}
+
+.lm.ok2 b {
+  display: block;
+  font-size: 10px;
+  color: #047857;
+  background: #ecfdf5;
+  border-radius: 99px;
+  padding: 2px 10px;
+  margin: 0 auto 10px;
+  width: fit-content;
+}
+
+.lm.ok2 h3 {
+  margin: 0 0 14px;
+}
+
+.lm h5 {
+  margin: 6px 0 0;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: #64748b;
+  font-weight: 600;
+  border-bottom: 1px solid #eef1f6;
+  padding-bottom: 4px;
+}
+
+.lm h6 {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
+.lm .g2c {
+  display: grid;
+  gap: 14px;
+}

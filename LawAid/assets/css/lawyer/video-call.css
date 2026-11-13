@@ -1,0 +1,136 @@
+/* Styles used only by lawyer/video-call.html */
+
+.vc {
+  min-height: 100vh;
+  background: #0f1c33;
+  display: grid;
+  place-items: center;
+  padding: 30px 16px;
+}
+
+.vc .bg {
+  background: #f0f4f9;
+  padding: 90px 170px;
+  width: min(900px,100%);
+}
+
+.vc .fr {
+  background: #fff;
+  border-radius: 26px;
+  padding: 14px;
+  box-shadow: 0 20px 40px #0003;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.vc .st2 {
+  position: relative;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.vc .st2>img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.vc .lv {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.vc .lv i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  margin-right: 6px;
+}
+
+.vc .you {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 112px;
+  border-radius: 8px;
+  border: 2px solid #ffffffaa;
+  overflow: hidden;
+}
+
+.vc .you img {
+  width: 100%;
+  display: block;
+}
+
+.vc .tg2 {
+  position: absolute;
+  background: #000a;
+  color: #fff;
+  font-size: 11px;
+  border-radius: 99px;
+  padding: 6px 14px;
+  line-height: 1.2;
+}
+
+.vc .rt {
+  position: absolute;
+  right: 14px;
+  top: 130px;
+  display: grid;
+  gap: 10px;
+}
+
+.vc .rt span {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #000a;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.vc .cb {
+  background: #121a29;
+  border-radius: 0 0 14px 14px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px;
+}
+
+.vc .cb a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #283347;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+}
+
+.vc .cb a.end {
+  width: 54px;
+  background: #dc2626;
+  box-shadow: 0 0 14px #dc262688;
+}
+
+@media (max-width:700px) {
+  .vc .bg {
+    padding: 30px 10px;
+  }
+}
+
+body.theme-client:has(.vc) {
+  background: #0a1a33;
+}

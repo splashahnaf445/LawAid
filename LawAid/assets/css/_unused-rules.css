@@ -1,0 +1,11 @@
+/* Rules from the original style.css that no page references. Kept for reference only - not linked by any page. */
+
+.yax {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #f59e0b;
+  height: 230px;
+  padding-right: 6px;
+}

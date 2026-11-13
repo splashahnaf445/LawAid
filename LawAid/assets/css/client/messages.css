@@ -1,0 +1,131 @@
+/* Styles used only by client/messages.html */
+
+.mw2 {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 16px 20px;
+}
+
+.mw2 h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.cm {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  background: #fff;
+  border: 1px solid #d5dbe8;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-top: 20px;
+  min-height: 540px;
+  color: #14213d;
+}
+
+.cm aside {
+  border-right: 1px solid #e2e6f0;
+}
+
+.cm .ci {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  font-size: 11px;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.cm .ci.on {
+  background: #fffbeb;
+  border-left: 3px solid #d97706;
+}
+
+.cm .ci img,
+.cm .ph2 img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex: none;
+}
+
+.cm .ci b {
+  font-size: 12px;
+}
+
+.cm .ci small {
+  display: block;
+}
+
+.cm .th {
+  background: #f8fafc;
+  padding: 18px 24px;
+}
+
+.cm .th .m {
+  display: flex;
+  gap: 10px;
+  margin: 14px 0;
+  align-items: flex-end;
+}
+
+.cm .th .m.me {
+  justify-content: flex-end;
+}
+
+.cm .th .m img {
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.cm .th .m div {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  max-width: 62%;
+}
+
+.cm .th .m.me div {
+  background: #d97706;
+  color: #fff;
+  border-color: #d97706;
+}
+
+.cm .th small {
+  display: block;
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.cm .tl2 {
+  padding: 14px 20px;
+  border-bottom: 1px solid #e2e6f0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.cm .in2 {
+  border-top: 1px solid #e2e6f0;
+  padding: 12px 20px;
+}
+
+.cm .in2 input {
+  background: #f1f5f9;
+  color: #14213d;
+  border-color: #e2e6f0;
+  padding: 14px;
+  margin-top: 10px;
+}
+
+@media (max-width:860px) {
+  .cm {
+    grid-template-columns: 1fr;
+  }
+}

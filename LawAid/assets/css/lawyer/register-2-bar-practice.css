@@ -1,0 +1,16 @@
+/* Styles used only by lawyer/register-2-bar-practice.html */
+
+.chp span {
+  display: inline-block;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  margin: 0 6px 8px 0;
+  background: #0c1220;
+}
+
+.chp span.on {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}

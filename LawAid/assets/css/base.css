@@ -1,0 +1,418 @@
+/* Global design tokens, reset, header, footer, buttons, forms, shared components (used by BOTH portals) */
+
+:root {
+  --bg: #0a1a33;
+  --bg2: #0f2342;
+  --card: #13294a;
+  --line: #233a5e;
+  --amber: #f59e0b;
+  --amb2: #d97706;
+  --tx: #e8eefb;
+  --mut: #8fa1c2;
+  --ok: #34d399;
+  --r: #f87171;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tx);
+  font: 15px/1.5 "Plus Jakarta Sans",Inter,system-ui,sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+small {
+  color: var(--mut);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 24px;
+  height: 70px;
+  background: #0a1a33;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--amb2);
+  color: #fff;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.links a {
+  padding: 6px 2px;
+  font-size: 15px;
+}
+
+.links a.on {
+  color: var(--amber);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--amb2);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid var(--amb2);
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--tx);
+}
+
+.btn.sm {
+  padding: 5px 12px;
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.g2 {
+  grid-template-columns: repeat(2,1fr);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  background: #f59e0b22;
+  color: var(--amber);
+}
+
+.pill.g {
+  background: #34d39922;
+  color: var(--ok);
+}
+
+.pill.r {
+  background: #f8717122;
+  color: var(--r);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--mut);
+  margin-bottom: 4px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  background: #0b1c38;
+  border: 1px solid var(--line);
+  color: var(--tx);
+  border-radius: 8px;
+  padding: 9px 11px;
+  font: inherit;
+}
+
+.opt {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.opt.on {
+  border-color: var(--amber);
+  background: #f59e0b18;
+}
+
+.cal {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.cal span {
+  padding: 6px 0;
+  border-radius: 8px;
+  background: #0b1c38;
+}
+
+.cal .sel {
+  background: var(--amb2);
+}
+
+.cal .no {
+  background: #f8717133;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000a;
+  z-index: 20;
+  overflow: auto;
+  padding: 40px 16px;
+}
+
+.modal:target {
+  display: block;
+}
+
+.x {
+  font-size: 20px;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(4,1fr);
+  gap: 24px;
+  padding: 60px 40px;
+  background: #08142a;
+  margin-top: 50px;
+  font-size: 13px;
+}
+
+footer h4 {
+  color: var(--amber);
+  margin: 0 0 12px;
+}
+
+footer a {
+  display: block;
+  color: var(--mut);
+  margin: 6px 0;
+}
+
+@media (max-width:860px) {
+  .g2,
+  .g3,
+  .g4,
+  .f3,
+  .tiles,
+  .split,
+  .band,
+  .stat-panel,
+  footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 30px 16px;
+  background: linear-gradient(#0008,#0008),url(../img/hero/supreme-court-building.jpg) center/cover;
+  text-align: center;
+}
+
+.login .lg {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: #111c33;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 12px;
+}
+
+.login .lg i {
+  font-style: normal;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--amb2);
+  display: grid;
+  place-items: center;
+}
+
+.login h1 {
+  font: 400 30px Georgia,serif;
+  margin: 0;
+}
+
+.login .sub {
+  letter-spacing: .2em;
+  color: #aab6cc;
+  font-size: 13px;
+  margin: 6px 0 24px;
+}
+
+.lbox {
+  width: min(400px,100%);
+  margin: 0 auto;
+  background: #161e2dee;
+  border: 1px solid #2a3550;
+  border-radius: 14px;
+  padding: 26px;
+  text-align: left;
+}
+
+.lbox h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.lbox label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  margin: 16px 0 6px;
+}
+
+.lbox .fp {
+  float: right;
+  color: var(--amber);
+  font-size: 12px;
+  text-transform: none;
+}
+
+.lbox .btn {
+  display: block;
+  text-align: center;
+  background: #f59e0b;
+  color: #111;
+  margin: 20px 0 14px;
+  padding: 12px;
+  box-shadow: 0 0 16px #f59e0b55;
+}
+
+.lbox p {
+  text-align: center;
+  font-size: 13px;
+  color: var(--mut);
+  margin: 0;
+}
+
+.lbox p a {
+  color: #fff;
+}
+
+.lbox input {
+  background: #0c1220;
+}
+
+.back {
+  display: block;
+  margin-top: 24px;
+  color: #cbd5e1;
+}
+
+.sp2 {
+  font-size: 12px;
+  padding: 3px 12px;
+  border-radius: 99px;
+  border: 1px solid;
+}
+
+.o {
+  color: #c2410c;
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+body.theme-client {
+  background: #f8fafc;
+  color: #14213d;
+}
+
+.theme-client small {
+  color: #64748b;
+}
+
+.ct {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+  margin: 36px 0;
+}
+
+@media (max-width:860px) {
+  .ct,
+  .bk,
+  .chart {
+    grid-template-columns: 1fr;
+  }
+}
+
+.up {
+  background: #0b1425;
+  color: #fff;
+  border-radius: 6px;
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 370px;
+  margin: 20px auto;
+}
+
+.modal.bl {
+  backdrop-filter: blur(4px);
+  background: #050d1cbb;
+}
+
+.theme-client footer {
+  color: #cbd5e1;
+}
+
+.theme-client footer .brand,
+.theme-client footer b {
+  color: #fff;
+}
+
+.theme-client footer small {
+  color: #94a3b8;
+}

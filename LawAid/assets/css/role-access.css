@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+:root{--navy:#0b1428;--gold:#ffc21a;--blue:#5ca4ff;--green:#19d6a0;--muted:#c4ccda}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+body{font-family:'DM Sans',Arial,sans-serif;background:#080f1d;color:#fff}
+a{color:inherit;text-decoration:none}
+.access-screen{min-height:100vh;display:grid;place-items:center;padding:38px 24px;background:linear-gradient(90deg,rgba(3,8,18,.78),rgba(5,12,25,.55)),url('../img/hero/law-books-scales.jpg') center/cover fixed no-repeat}
+.access-card{width:min(1024px,100%);padding:43px 48px 48px;background:rgba(10,18,37,.88);border:1px solid rgba(197,211,237,.24);border-radius:25px;box-shadow:0 24px 75px rgba(0,0,0,.48);backdrop-filter:blur(13px)}
+.access-heading{text-align:center;margin:0 0 48px}
+.access-heading h1{font:700 clamp(30px,3.2vw,46px)/1.15 'Playfair Display',Georgia,serif;margin:0 0 10px;letter-spacing:-1px}
+.access-heading p{font-size:15px;color:#c8d0de;margin:0}
+.access-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.access-role{min-width:0;min-height:344px;padding:28px 23px 22px;border:1px solid rgba(170,190,220,.13);border-radius:17px;background:rgba(13,23,44,.55);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.access-role:hover{transform:translateY(-4px);background:rgba(22,34,58,.8)}
+.role-icon{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;margin:0 0 25px;background:rgba(255,194,26,.12);border:1px solid rgba(255,194,26,.45);color:var(--gold)}
+.role-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.access-role small{font-size:11px;font-weight:700;letter-spacing:1.6px;color:var(--gold);margin-bottom:10px}
+.access-role h2{font:700 23px/1.2 'Playfair Display',Georgia,serif;margin:0 0 13px;color:#fff}
+.access-role p{font-size:14px;line-height:1.45;color:var(--muted);margin:0;max-width:245px;flex:1}
+.access-role b{width:100%;border-top:1px solid rgba(180,197,224,.12);padding-top:16px;margin-top:22px;font-size:12px;font-weight:600;color:var(--gold)}
+.access-role b span{font-size:22px;line-height:10px;vertical-align:-2px;margin-left:8px}
+.admin-role:hover{border-color:rgba(255,194,26,.55)}
+.lawyer-role .role-icon{background:rgba(57,137,255,.14);border-color:rgba(57,137,255,.5);color:var(--blue)}
+.lawyer-role small,.lawyer-role b{color:var(--blue)}
+.lawyer-role:hover{border-color:rgba(92,164,255,.55)}
+.client-role .role-icon{background:rgba(25,214,160,.13);border-color:rgba(25,214,160,.45);color:var(--green)}
+.client-role small,.client-role b{color:var(--green)}
+.client-role:hover{border-color:rgba(25,214,160,.55)}
+.access-footer{border-top:1px solid rgba(180,197,224,.12);margin-top:40px;padding-top:23px}
+.access-footer a{font-size:13px;color:#9eabc0;transition:color .2s}
+.access-footer a:hover{color:#fff}
+@media(max-width:760px){.access-card{padding:35px 28px}.access-heading{margin-bottom:32px}.access-roles{grid-template-columns:1fr;gap:15px}.access-role{min-height:0;padding:24px}.access-role p{flex:none;max-width:420px}.access-role b{margin-top:18px}.role-icon{margin-bottom:16px}.access-footer{margin-top:28px}}
+@media(max-width:420px){.access-screen{padding:18px 12px}.access-card{padding:28px 17px;border-radius:18px}.access-heading h1{font-size:30px}.access-heading p{font-size:13px}.access-role h2{font-size:21px}}

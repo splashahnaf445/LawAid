@@ -1,0 +1,93 @@
+/* Client portal – components shared by several client pages */
+
+.theme-client .nav .links a {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.theme-client .user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cw {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.cc2 {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 6px #0001;
+}
+
+.cc2 small {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+
+.cc2 b.n {
+  display: block;
+  font-size: 30px;
+  margin: 14px 0 6px;
+}
+
+.cc2 .btn {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  padding: 6px;
+}
+
+.pm {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 30px 16px;
+  background: #f1f5f9;
+}
+
+.theme-client .nav {
+  background: #0a1a33;
+  color: #fff;
+}
+
+.theme-client .nav .brand,
+.theme-client .nav .links a,
+.theme-client .nav .user {
+  color: #fff;
+}
+
+.theme-client .nav .links a.on {
+  color: var(--amber);
+}
+
+.theme-client .nav .user small {
+  color: #94a3b8;
+}
+
+.cm2 {
+  max-width: 480px;
+  margin: 60px auto;
+  background: #fff;
+  color: #14213d;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 20px 60px #0008;
+}
+
+.cm2 h6 {
+  margin: 14px 0 6px;
+  font-size: 13px;
+}
+
+.cm2 small {
+  color: #64748b;
+  font-size: 11px;
+}

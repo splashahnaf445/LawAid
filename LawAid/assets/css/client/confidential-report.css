@@ -1,0 +1,140 @@
+/* Styles used only by client/confidential-report.html */
+
+.cr {
+  width: min(900px,100%);
+  background: #fff;
+  border-radius: 34px;
+  box-shadow: 0 24px 60px #0004;
+  overflow: hidden;
+  color: #14213d;
+}
+
+.cr .top {
+  background: #0a1425;
+  color: #fff;
+  text-align: center;
+  padding: 34px 20px;
+  position: relative;
+}
+
+.cr .top b {
+  display: block;
+}
+
+.cr .top small {
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+.cr .top .x3 {
+  position: absolute;
+  right: 56px;
+  top: 42px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #1e293b;
+  display: grid;
+  place-items: center;
+}
+
+.cr .bd3 {
+  padding: 36px 100px 40px 140px;
+}
+
+.cr label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: #475569;
+  margin: 18px 0 8px;
+}
+
+.cr input,
+.cr select,
+.cr textarea {
+  background: #f8fafc;
+  color: #14213d;
+  border-color: #dbe2ee;
+  border-radius: 10px;
+}
+
+.cr .tog {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 18px 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cr .tog span.on {
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 1px 3px #0002;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.cr .dz {
+  border: 2px dashed #cbd5e1;
+  border-radius: 14px;
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 420px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #f8fafc;
+}
+
+.cr .dz span {
+  color: #ea580c;
+}
+
+.cr .cf {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 22px;
+  font-size: 11px;
+  display: flex;
+  gap: 10px;
+}
+
+.cr .ac2 {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 50px;
+  padding: 0 56px 60px;
+}
+
+.cr .ac2 a {
+  text-align: center;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.cr .ac2 a.go {
+  background: linear-gradient(90deg,#ea580c,#d97706);
+  color: #fff;
+  border: 0;
+}
+
+@media (max-width:860px) {
+  .cr .bd3 {
+    padding: 24px;
+  }
+  .cr .ac2 {
+    padding: 0 24px 30px;
+    gap: 12px;
+  }
+}

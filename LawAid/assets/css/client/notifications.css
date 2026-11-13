@@ -1,0 +1,124 @@
+/* Styles used only by client/notifications.html */
+
+.np {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 50px 16px 60px;
+  position: relative;
+}
+
+.np .x2 {
+  position: absolute;
+  right: -30px;
+  top: 40px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.np .bc {
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: #64748b;
+}
+
+.np .bc b {
+  color: #d97706;
+  font-weight: 500;
+}
+
+.np h1 {
+  font: 700 28px Georgia,serif;
+  margin: 10px 0 26px;
+}
+
+.np .tb {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 24px 0 30px;
+}
+
+.np .tb a {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 99px;
+  padding: 4px 14px;
+  font-size: 13px;
+}
+
+.np .tb a.on {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  font-weight: 700;
+}
+
+.np .gl {
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: #64748b;
+  margin: 12px 0;
+}
+
+.nf {
+  display: flex;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px #0001;
+}
+
+.nf .ic {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #fffbeb;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.nf .ic.g {
+  background: #ecfdf5;
+}
+
+.nf .ic.s {
+  background: #f1f5f9;
+}
+
+.nf h3 {
+  margin: 0;
+  font: 500 19px Inter,sans-serif;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.nf h3 small {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.nf .ch {
+  display: inline-block;
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 1px 8px;
+  font-size: 11px;
+  margin: 6px 0 14px;
+}
+
+.nf .btn {
+  background: #fff;
+  color: #14213d;
+  border-color: #d5dbe8;
+  font-size: 12px;
+}

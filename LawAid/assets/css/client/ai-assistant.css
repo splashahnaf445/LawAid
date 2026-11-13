@@ -1,0 +1,174 @@
+/* Styles used only by client/ai-assistant.html */
+
+.aw {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  background: #fff;
+  min-height: 900px;
+}
+
+.aw aside {
+  border-right: 1px solid #e2e6f0;
+  padding: 14px;
+  font-size: 12px;
+}
+
+.aw aside .btn {
+  display: block;
+  text-align: center;
+  background: #ea580c;
+  border-color: #ea580c;
+  margin-bottom: 12px;
+}
+
+.lg2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #e2e6f0;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.lg2 span {
+  padding: 4px;
+}
+
+.lg2 span+span {
+  color: #ea580c;
+}
+
+.aw aside h6 {
+  margin: 0 0 8px;
+  font-size: 10px;
+  letter-spacing: .06em;
+  color: #64748b;
+}
+
+.aw aside .mo2 {
+  padding: 8px;
+  border-radius: 6px;
+  margin: 2px 0;
+}
+
+.aw aside .mo2.on {
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
+}
+
+.aw aside .hs {
+  padding: 6px 8px;
+  font-size: 11px;
+}
+
+.aw aside .hs.on {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+.am {
+  padding: 14px 20px;
+  background: #f8fafc;
+}
+
+.am .tt {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.qq {
+  text-align: center;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.qq span {
+  border: 1px solid #e2e6f0;
+  background: #fff;
+  border-radius: 99px;
+  padding: 2px 10px;
+  margin: 4px;
+  display: inline-block;
+  color: #475569;
+}
+
+.ub {
+  background: #0a1a33;
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  max-width: 500px;
+  margin: 24px 0 4px 40px;
+  font-size: 13px;
+}
+
+.ans {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 12px 0 0 10px;
+  font-size: 13px;
+}
+
+.ans .box {
+  background: #f8fafc;
+  border: 1px solid #e2e6f0;
+  border-radius: 8px;
+  padding: 14px;
+  margin: 14px 0;
+}
+
+.ans .box p {
+  border-left: 2px solid #f59e0b;
+  padding-left: 8px;
+  margin: 8px 0;
+}
+
+.chk {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 12px;
+}
+
+.chk b {
+  color: #c2410c;
+}
+
+.cin2 {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.cin2 input {
+  background: #f8fafc;
+  color: #14213d;
+  border-color: #e2e6f0;
+}
+
+.cin2 .btn {
+  background: #ea580c;
+  border-color: #ea580c;
+  border-radius: 6px;
+}
+
+.tag2 {
+  background: #0a1a33;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+@media (max-width:860px) {
+  .aw {
+    grid-template-columns: 1fr;
+  }
+}
