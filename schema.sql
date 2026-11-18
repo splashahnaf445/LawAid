@@ -5,7 +5,6 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;    -- gen_random_bytes(), crypt()
 CREATE EXTENSION IF NOT EXISTS btree_gist;  -- no-overlap constraint on lawyer slots
 CREATE EXTENSION IF NOT EXISTS pg_trgm;     -- fuzzy lawyer / case search
 
-DROP SCHEMA IF EXISTS lawaid CASCADE;
 CREATE SCHEMA lawaid;
 SET search_path = lawaid, public;
 
