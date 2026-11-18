@@ -3,7 +3,7 @@ lawaid/
 ├── docker-compose.yml          # local PostgreSQL
 ├── .env.example                # DATABASE_URL, SECRET_KEY (never commit .env)
 ├── docs/
-│   └── DB_DESIGN.md            # ERD + table explanations (SYS-14)
+│   └── DB_DESIGN.md
 │
 ├── backend/
 │   ├── manage.py
@@ -13,7 +13,7 @@ lawaid/
 │   │   ├── urls.py
 │   │   ├── asgi.py
 │   │   └── wsgi.py
-│   ├── accounts/               # SYS-18 lives here
+│   ├── accounts/
 │   │   ├── models.py           # User, ClientProfile, LawyerProfile
 │   │   ├── managers.py         # custom user manager (email login)
 │   │   ├── validators.py       # Bar Council no., phone, password rules
