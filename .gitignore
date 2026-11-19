@@ -2,7 +2,19 @@
 node_modules/
 **/node_modules/
 
-# Next.js build output
+# Python & Django
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+media/
+backend/media/
+backend/storage/
+
+# Next.js / Vite build output
 .next/
 out/
 dist/
@@ -12,6 +24,10 @@ build/
 .env
 .env.*
 !.env.example
+
+# IDEs
+.idea/
+.vscode/
 
 # Logs & OS files
 npm-debug.log*
