@@ -14,7 +14,7 @@ from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db import IntegrityError, connection, transaction
 from rest_framework import serializers
 
-from backend.lawyers.models import Court, PracticeArea
+from lawyers.models import Court, PracticeArea
 
 from . import validators as rules
 from .models import AccountStatus, ClientProfile, Language, LawyerProfile, User, UserRole
