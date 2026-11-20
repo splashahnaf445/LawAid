@@ -1,0 +1,11 @@
+# Redocly CLI config for the LawAid API contract (SYS-16).
+# Run from the repo root:
+#   npx @redocly/cli lint docs/api/openapi.yaml --config docs/api/redocly.yaml
+extends:
+  - recommended
+rules:
+  # Django routes end with "/" (APPEND_SLASH). Removing the slash would document
+  # URLs that do not exist (POST without the slash fails), so this style rule is off.
+  no-path-trailing-slash: off
+  # The only server today is the local Django dev server; there is no deployed URL yet.
+  no-server-example.com: off
