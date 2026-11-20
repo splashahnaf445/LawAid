@@ -1,22 +1,40 @@
 """
-API tests for FR-1 (client + lawyer registration). They run against a real PostgreSQL 18
-test database built from db/schema.sql (see config/test_runner.py):
+API tests for FR-1 (client + lawyer registration).
 
     cd backend && python manage.py test accounts lawyers
+
+Integration changes (integration/merge-all): the database is built from Django migrations
+(SQLite by default, see config/test_runner.py); LawyerProfile now lives in lawyers.models;
+lawyer registration also requires the NID and Bar Council certificate (Ahnaf, SYS-21), so
+lawyer requests are multipart with two small test files stored in a temporary folder.
 """
+import shutil
+import tempfile
 from decimal import Decimal
 
 from django.core.cache import cache
-from django.db import connection
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import override_settings
 from django.urls import reverse
 from rest_framework import serializers
 from rest_framework.test import APITestCase
 
-from accounts.models import ClientProfile, LawyerProfile, User
+from accounts.models import ClientProfile, User
 from accounts.serializers import ClientRegisterSerializer, LawyerRegisterSerializer
-from lawyers.models import Court, PracticeArea
+from lawyers.models import Court, LawyerProfile, PracticeArea
 
 PASSWORD = "LawAid@123"
+_DOCS_DIR = tempfile.mkdtemp(prefix="lawaid-test-docs-")
+
+
+def verification_documents():
+    """Fresh fake upload files (an UploadedFile can only be read once)."""
+    return {
+        "nid_document": SimpleUploadedFile("nid.pdf", b"%PDF-1.4 test NID", content_type="application/pdf"),
+        "bar_certificate_document": SimpleUploadedFile(
+            "certificate.png", b"\x89PNG\r\n\x1a\n test certificate", content_type="image/png"
+        ),
+    }
 
 
 def client_payload(**overrides):
@@ -32,7 +50,13 @@ def client_payload(**overrides):
     return payload
 
 
+@override_settings(ENCRYPTED_DOCUMENTS_DIR=_DOCS_DIR)
 class RegistrationTestCase(APITestCase):
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        shutil.rmtree(_DOCS_DIR, ignore_errors=True)
+
     @classmethod
     def setUpTestData(cls):
         cls.court = Court.objects.create(name="Test High Court", court_type="supreme_court", district="Dhaka")
@@ -57,6 +81,7 @@ class RegistrationTestCase(APITestCase):
             "consultation_fee": 5000,
             "two_factor_enabled": True,
             "accept_terms": True,
+            **verification_documents(),
         }
         payload.update(overrides)
         return payload
@@ -65,7 +90,7 @@ class RegistrationTestCase(APITestCase):
         return self.client.post(reverse("register-client"), client_payload(**overrides), format="json")
 
     def post_lawyer(self, **overrides):
-        return self.client.post(reverse("register-lawyer"), self.lawyer_payload(**overrides), format="json")
+        return self.client.post(reverse("register-lawyer"), self.lawyer_payload(**overrides), format="multipart")
 
 
 class ClientRegistrationTests(RegistrationTestCase):
@@ -174,14 +199,18 @@ class LawyerRegistrationTests(RegistrationTestCase):
         self.assertEqual(profile.consultation_fee, Decimal("5000.00"))
         self.assertEqual(profile.verification_status, "pending")
 
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT practice_area_id FROM lawyer_practice_areas WHERE lawyer_id = %s", [user.pk])
-            self.assertCountEqual([r[0] for r in cursor.fetchall()], [self.area1.pk, self.area2.pk])
+        self.assertCountEqual(
+            profile.practice_areas.values_list("pk", flat=True), [self.area1.pk, self.area2.pk]
+        )
+        # Ahnaf (SYS-21): both documents stored encrypted with the profile
+        self.assertCountEqual(
+            profile.verification_documents.values_list("doc_type", flat=True), ["nid", "bar_certificate"]
+        )
 
     def test_fee_is_optional_and_duplicate_areas_are_collapsed(self):
         payload = self.lawyer_payload(practice_areas=[self.area1.pk, self.area1.pk])
         del payload["consultation_fee"]
-        res = self.client.post(reverse("register-lawyer"), payload, format="json")
+        res = self.client.post(reverse("register-lawyer"), payload, format="multipart")
         self.assertEqual(res.status_code, 201, res.content)
         user = User.objects.get(email="tanvir@example.com")
         self.assertEqual(LawyerProfile.objects.get(user=user).consultation_fee, Decimal("0.00"))

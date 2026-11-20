@@ -2,24 +2,28 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { listCourts, listPracticeAreas, registerLawyer } from '../api/auth'
 import AuthShell from '../components/AuthShell.jsx'
+import DocumentDropzone from '../components/DocumentDropzone.jsx'
 import FormField from '../components/FormField.jsx'
 import PasswordStrength from '../components/PasswordStrength.jsx'
 import { parseApiError } from '../utils/forms'
 import {
   normalizeBarCouncilNo, validateBarCouncilNo, validateConfirm, validateEmail, validateFee,
-  validateFullName, validatePassword, validatePhone,
+  validateDocumentFile, validateFullName, validatePassword, validatePhone,
 } from '../utils/validators'
 
 const INITIAL = {
   full_name: '', phone: '', email: '', primary_court: '', preferred_language: 'en',
   bar_council_no: '', bar_association: '', practice_areas: [], chamber_address: '',
+  // Ahnaf (SYS-21): verification documents (required) and optional profile details
+  nid_document: null, bar_certificate_document: null, years_experience: '', bio: '',
   password: '', password_confirm: '', consultation_fee: '', two_factor_enabled: true, accept_terms: false,
 }
 
 // Which step owns which field - used to jump back when the server rejects something earlier.
 const STEP_FIELDS = {
   1: ['full_name', 'phone', 'email', 'primary_court', 'preferred_language'],
-  2: ['bar_council_no', 'bar_association', 'practice_areas', 'chamber_address'],
+  2: ['bar_council_no', 'bar_association', 'practice_areas', 'chamber_address',
+      'nid_document', 'bar_certificate_document', 'years_experience', 'bio'],
   3: ['password', 'password_confirm', 'consultation_fee', 'two_factor_enabled', 'accept_terms'],
 }
 const ALL_FIELDS = Object.values(STEP_FIELDS).flat()
@@ -43,6 +47,9 @@ function validateStep(step, v) {
     e.bar_association = v.bar_association.trim() ? '' : 'Select or type your bar association.'
     e.practice_areas = v.practice_areas.length ? '' : 'Select at least one practice area.'
     e.chamber_address = v.chamber_address.trim() ? '' : 'Enter your chamber or office address.'
+    e.nid_document = validateDocumentFile(v.nid_document, 'National ID Card') || ''
+    e.bar_certificate_document = validateDocumentFile(v.bar_certificate_document, 'Bar Council Certificate') || ''
+    e.years_experience = v.years_experience === '' || /^\d{1,2}$/.test(String(v.years_experience)) ? '' : 'Enter whole years (0-99).'
   } else {
     e.password = validatePassword(v.password)
     e.password_confirm = validateConfirm(v.password, v.password_confirm)
@@ -106,6 +113,11 @@ export default function RegisterLawyer() {
     clearError('practice_areas')
   }
 
+  function setFile(name, file) {
+    setValues((v) => ({ ...v, [name]: file }))
+    clearError(name)
+  }
+
   function fail(found, atStep) {
     setErrors(found)
     if (atStep) setStep(atStep)
@@ -136,7 +148,17 @@ export default function RegisterLawyer() {
         two_factor_enabled: values.two_factor_enabled,
         accept_terms: values.accept_terms,
       }
-      setCreated(await registerLawyer(payload))
+      // Multipart so the NID and Bar Council certificate (Ahnaf, SYS-21) travel with the form.
+      const form = new FormData()
+      for (const [key, value] of Object.entries(payload)) {
+        if (Array.isArray(value)) value.forEach((item) => form.append(key, item))
+        else form.append(key, typeof value === 'boolean' ? String(value) : value)
+      }
+      form.append('nid_document', values.nid_document)
+      form.append('bar_certificate_document', values.bar_certificate_document)
+      if (values.years_experience !== '') form.append('years_experience', values.years_experience)
+      if (values.bio.trim()) form.append('bio', values.bio.trim())
+      setCreated(await registerLawyer(form))
     } catch (err) {
       const parsed = parseApiError(err, ALL_FIELDS)
       setGeneral(parsed.general)
@@ -240,6 +262,31 @@ export default function RegisterLawyer() {
 
             <FormField id="chamber_address" label="Chamber room / office address" placeholder="e.g. Chambers 405, Supreme Court Bar"
               autoComplete="street-address" value={values.chamber_address} onChange={onChange} error={errors.chamber_address} />
+
+            {/* Ahnaf (SYS-21 / FR-2): documents are encrypted on upload and only admins can open them */}
+            <DocumentDropzone
+              title="National ID Card (NID)"
+              subtitle="Front and back in one PDF, or a clear JPG/PNG (max 15 MB)"
+              docType="nid"
+              file={values.nid_document}
+              onFileSelect={(file) => setFile('nid_document', file)}
+              onFileRemove={() => setFile('nid_document', null)}
+              error={errors.nid_document}
+            />
+            <DocumentDropzone
+              title="Bar Council Certificate (Sanad)"
+              subtitle="Enrolment certificate issued by the Bangladesh Bar Council (max 15 MB)"
+              docType="bar_certificate"
+              file={values.bar_certificate_document}
+              onFileSelect={(file) => setFile('bar_certificate_document', file)}
+              onFileRemove={() => setFile('bar_certificate_document', null)}
+              error={errors.bar_certificate_document}
+            />
+
+            <FormField id="years_experience" label="Years of experience (optional)" inputMode="numeric"
+              value={values.years_experience} onChange={onChange} error={errors.years_experience} />
+            <FormField id="bio" label="Short professional bio (optional)" as="textarea" rows={3}
+              value={values.bio} onChange={onChange} error={errors.bio} />
           </>
         )}
 

@@ -13,6 +13,8 @@ export default function Landing() {
           <div className="ctas">
             <Link to="/register" className="btn">Create an account</Link>
             <Link to="/login" className="btn ghost">Log in</Link>
+            {/* Ahnaf (SYS-22): entry to the verified-lawyer directory */}
+            <Link to="/lawyers" className="btn ghost">Find a verified lawyer</Link>
           </div>
         </div>
       </main>
