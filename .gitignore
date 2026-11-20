@@ -1,0 +1,31 @@
+.env
+.env.*
+!.env.example
+
+# ---- Python / Django ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.sqlite3
+staticfiles/
+media/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ---- Node / React / Vite ----
+node_modules/
+dist/
+.vite/
+*.local
+npm-debug.log*
+
+# ---- Editors / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
