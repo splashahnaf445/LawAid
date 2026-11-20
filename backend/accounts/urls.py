@@ -11,6 +11,7 @@ from .views import (
     AdminDocumentDecryptionView,
     AdminVerificationOverviewStatsView,
 )
+from .password_reset_views import ForgotPasswordView, ResetPasswordView
 
 urlpatterns = [
     # Registration (FR-1, FR-2)
@@ -31,4 +32,8 @@ urlpatterns = [
     # Encrypted Document Retrieval (NFR-4: Admin Only)
     path('verification/documents/<uuid:document_id>/view/', AdminDocumentDecryptionView.as_view(), {'action': 'view'}, name='admin-view-doc'),
     path('verification/documents/<uuid:document_id>/download/', AdminDocumentDecryptionView.as_view(), {'action': 'download'}, name='admin-download-doc'),
+
+    # Password Recovery (SYS-20 / SRS FR-5 – Mashruba Aktar)
+    path('auth/password/forgot/', ForgotPasswordView.as_view(), name='password-forgot'),
+    path('auth/password/reset/', ResetPasswordView.as_view(), name='password-reset'),
 ]
