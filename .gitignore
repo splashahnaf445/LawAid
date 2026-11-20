@@ -25,6 +25,7 @@ node_modules/
 **/node_modules/
 dist/
 build/
+out/
 .next/
 .vite/
 *.local

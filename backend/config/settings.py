@@ -166,3 +166,29 @@ SIMPLE_JWT = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+# ---------------------------------------------------------------------------
+# Email (SYS-20 / SRS FR-5 – Password Recovery)
+# ---------------------------------------------------------------------------
+# In development (DEBUG=True) all emails are printed to the terminal.
+# In production, set EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+# and the SMTP_* variables in your environment / .env file.
+EMAIL_BACKEND = os.getenv(
+    'EMAIL_BACKEND',
+    'django.core.mail.backends.console.EmailBackend',
+)
+EMAIL_HOST          = os.getenv('SMTP_HOST', 'smtp.gmail.com')
+EMAIL_PORT          = int(os.getenv('SMTP_PORT', '587'))
+EMAIL_USE_TLS       = os.getenv('SMTP_USE_TLS', 'True').lower() in ('true', '1', 't')
+EMAIL_HOST_USER     = os.getenv('SMTP_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASSWORD', '')
+DEFAULT_FROM_EMAIL  = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@lawaid.local')
+
+# Front-end base URL used to build the reset link that is sent to the user.
+# Override with the real URL in production: FRONTEND_URL=https://lawaid.com
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+
+# How long a password-reset token stays valid (minutes).
+PASSWORD_RESET_TOKEN_EXPIRY_MINUTES = int(
+    os.getenv('PASSWORD_RESET_TOKEN_EXPIRY_MINUTES', '30')
+)
