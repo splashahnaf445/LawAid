@@ -1,0 +1,26 @@
+git clone https://github.com/splashahnaf445/LawAid
+cd lawaid
+
+# 1. Database
+docker compose up -d
+
+# 2. Backend
+cd backend
+python -m venv .venv                  # create the environment
+source .venv/bin/activate             # Windows: .venv\Scripts\activate
+pip install -r requirements.txt       # installs Django, DRF, psycopg, etc.
+cp ../.env.example ../.env            # then edit .env with your DB password
+python manage.py migrate
+python manage.py runserver
+
+# 3. Frontend (new terminal)
+cd frontend
+npm install                           # installs React, Vite, axios, etc.
+npm run dev
+
+
+# Repeat this part after running everytime
+
+cd backend
+source .venv/bin/activate             # Windows: .venv\Scripts\activate
+python manage.py runserver
