@@ -3,14 +3,51 @@ from django.core.management.base import BaseCommand
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone
 from accounts.models import User, UserRole, AccountStatus
-from lawyers.models import LawyerProfile, LawyerVerificationDocument, VerificationStatus
+from lawyers.models import Court, LawyerProfile, LawyerVerificationDocument, PracticeArea, VerificationStatus
 from core.encryption import DocumentEncryptionService
+
+# Integration (integration/merge-all): courts and practice areas from db/seed.sql (Usama).
+# Usama's lawyer registration form loads them from /api/reference/; with the migration-built
+# database nothing else creates them, so the seed command adds them (idempotent).
+COURTS = [
+    ('Supreme Court of Bangladesh - High Court Division', 'supreme_court', 'Dhaka'),
+    ('Supreme Court of Bangladesh - Appellate Division', 'supreme_court', 'Dhaka'),
+    ('Dhaka District & Sessions Court', 'district', 'Dhaka'),
+    ('Dhaka Metropolitan Sessions Court', 'district', 'Dhaka'),
+    ('Family Court No. 2, Dhaka', 'family', 'Dhaka'),
+    ('Administrative Tribunal, Dhaka', 'tribunal', 'Dhaka'),
+    ('Artha Rin Adalat, Dhaka', 'special', 'Dhaka'),
+    ('Chattogram District Court', 'district', 'Chattogram'),
+    ('Labour Court, Dhaka', 'tribunal', 'Dhaka'),
+    ('Cyber Tribunal, Dhaka', 'tribunal', 'Dhaka'),
+]
+PRACTICE_AREAS = [
+    ('constitutional', 'Constitutional / Writ', 'সাংবিধানিক / রিট'),
+    ('corporate', 'Corporate & Commercial', 'কর্পোরেট ও বাণিজ্যিক'),
+    ('criminal', 'Criminal Defense', 'ফৌজদারি প্রতিরক্ষা'),
+    ('civil-property', 'Civil & Property', 'দেওয়ানি ও সম্পত্তি'),
+    ('family', 'Family & Custody', 'পারিবারিক ও অভিভাবকত্ব'),
+    ('labor', 'Labor Law', 'শ্রম আইন'),
+    ('cyber', 'Cyber Law', 'সাইবার আইন'),
+    ('banking', 'Banking & Artha Rin', 'ব্যাংকিং ও অর্থঋণ'),
+    ('inheritance', 'Inheritance & Probate', 'উত্তরাধিকার ও প্রোবেট'),
+    ('anti-corruption', 'Anti-Corruption (ACC)', 'দুর্নীতি দমন'),
+    ('arbitration', 'Arbitration', 'সালিশ'),
+    ('ip', 'Intellectual Property', 'বুদ্ধিবৃত্তিক সম্পত্তি'),
+]
+
 
 class Command(BaseCommand):
     help = 'Seeds initial LawAid users, verified/pending lawyers, and encrypted sample documents.'
 
     def handle(self, *args, **options):
         self.stdout.write("Seeding LawAid database...")
+
+        # 0. Reference data for the registration forms (from db/seed.sql)
+        for name, court_type, district in COURTS:
+            Court.objects.get_or_create(name=name, defaults={'court_type': court_type, 'district': district})
+        for slug, name_en, name_bn in PRACTICE_AREAS:
+            PracticeArea.objects.get_or_create(slug=slug, defaults={'name_en': name_en, 'name_bn': name_bn})
 
         # 1. Lead Admin
         admin, _ = User.objects.get_or_create(
