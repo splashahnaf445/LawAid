@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="724a0260-ac39-4935-87e5-a9bd08170620" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/http.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AuthShell.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AuthShell.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/FormField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/FormField.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/PasswordStrength.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/PasswordStrength.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Landing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Landing.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RegisterClient.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/RegisterClient.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RegisterLawyer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/RegisterLawyer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/RoleSelect.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/RoleSelect.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/auth.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/landing.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/landing.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/forms.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/forms.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/validators.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/validators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DB_DESIGN.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DB_DESIGN.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,16 +37,16 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "F:/UIU/8th Trimester/Software Engineering Lab/Project/Project Git/LawAid/backend/lawyers"
+    "last_opened_file_path": "F:/UIU/8th Trimester/Software Engineering Lab/Project/Project Git/LawAid/frontend/public/assets/img"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\frontend\public\assets\img" />
       <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\lawyers" />
       <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\core" />
       <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\config" />
       <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\accounts\migrations" />
-      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\accounts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\db" />
