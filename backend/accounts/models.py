@@ -1,3 +1,13 @@
+"""
+Account models: User and ClientProfile (LawyerProfile lives in lawyers.models).
+
+Integration note (integration/merge-all): this file combines
+  * Ahnaf's Django-managed models (migrations, PermissionsMixin, staff flags) - the runnable base, and
+  * Usama's schema-mapped fields (db/schema.sql: users, client_profiles) and the Language choices
+    his registration serializer uses.
+Table names follow db/schema.sql. Columns that still differ from schema.sql are listed in the
+integration PR for Ahnaf and Usama to align.
+"""
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from core.ids import generate_uuid
@@ -19,11 +29,17 @@ class AccountStatus(models.TextChoices):
 
 
 class Language(models.TextChoices):
+    # Usama (SYS-18): values of the schema's language_code enum.
     BN = 'bn', 'Bangla'
     EN = 'en', 'English'
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Central User model representing all platform actors.
+    Reflects the 'users' table in db/schema.sql.
+    SRS: FR-1, FR-4, FR-34.
+    """
     id = models.UUIDField(primary_key=True, default=generate_uuid, editable=False)
     role = models.CharField(max_length=20, choices=UserRole.choices, default=UserRole.CLIENT)
     full_name = models.CharField(max_length=255)
@@ -46,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True, blank=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)  # soft delete (NFR-8)
 
     objects = UserManager()
 
@@ -66,26 +82,38 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_admin(self):
         return self.role == UserRole.ADMIN or self.is_staff or self.is_superuser
 
+    # Statuses allowed to sign in. Saker's login (SYS-19) allowed only 'active'; registration
+    # (Usama, SYS-18) creates lawyers as 'pending_verification', and they must be able to log in
+    # to see their verification status, so that status is allowed too.
     SIGN_IN_STATUSES = (AccountStatus.ACTIVE, AccountStatus.PENDING_VERIFICATION)
 
     @property
     def can_sign_in(self):
+        """Saker (SYS-19): used by the cookie-based login / refresh / access-token checks."""
         return self.status in self.SIGN_IN_STATUSES and self.deleted_at is None and self.is_active
 
 
 class ClientProfile(models.Model):
+    """
+    Client profile reflecting the 'client_profiles' table in db/schema.sql.
+    Fields from both branches are kept: Usama's schema columns (gender ... address) and
+    Ahnaf's nid_number / emergency_contact / timestamps.
+    """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         primary_key=True,
         related_name='client_profile'
     )
+    # Usama (SYS-18) - columns from db/schema.sql
     gender = models.CharField(max_length=12, default='undisclosed')
     date_of_birth = models.DateField(null=True, blank=True)
     organization_name = models.TextField(null=True, blank=True)
     division = models.TextField(null=True, blank=True)
     district = models.TextField(null=True, blank=True)
+    # Shared by both branches
     address = models.TextField(blank=True, default='')
+    # Ahnaf (SYS-21) - not in db/schema.sql yet
     nid_number = models.CharField(max_length=30, blank=True, null=True)
     emergency_contact = models.CharField(max_length=20, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -101,6 +129,14 @@ class ClientProfile(models.Model):
 
 
 class RefreshToken(models.Model):
+    """
+    Saker (SYS-19): refresh tokens issued by the cookie-based login (db/schema.sql: refresh_tokens).
+    Only a SHA-256 hash of each token is stored; rotation revokes the old row.
+
+    Integration note: on Saker's branch this was an unmanaged model pointing at his own
+    unmanaged User. It now references the shared User model and is created by migration
+    accounts.0004 like the other tables.
+    """
     id = models.UUIDField(primary_key=True, default=generate_uuid, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id", related_name="+")
     token_hash = models.TextField(unique=True)
