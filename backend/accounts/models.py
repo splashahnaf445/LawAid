@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
-from core.ids import uuid7
+from backend.core.ids import uuid7
 
 from .managers import UserManager
 
