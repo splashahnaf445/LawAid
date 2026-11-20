@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="724a0260-ac39-4935-87e5-a9bd08170620" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Virtua envioronment setup command.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lawyers/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lawyers/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lawyers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lawyers/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/lawyers/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
