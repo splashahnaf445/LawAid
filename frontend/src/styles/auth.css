@@ -1,0 +1,59 @@
+/* Registration screens. Step bar, progress, buttons and chips are taken from the prototype
+   (lawyer/shared.css, register-2-bar-practice.css, register-3-security.css); error/success
+   states and <button> resets are new. Loaded after base.css. */
+
+.lbox { width: min(440px, 100%); }
+.lbox h2.rg { font-size: 22px; }
+.lbox label.k { font-weight: 500; text-transform: uppercase; font-size: 12px; }
+.lbox div.k { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; margin: 16px 0 6px; color: var(--mut); }
+.lbox .fg { font-size: 11px; color: var(--mut); margin-top: 4px; }
+
+/* step bar + progress */
+.stp { display: flex; justify-content: space-between; font-size: 13px; color: #94a3b8; margin-bottom: 6px; gap: 8px; }
+.stp .d { color: #34d399; }
+.stp .c { color: #f59e0b; font-weight: 600; }
+.stp i { font-style: normal; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; border: 1px solid #475569; font-size: 10px; margin-right: 6px; }
+.stp .c i { background: #f59e0b; color: #111; border-color: #f59e0b; }
+.stp .d i { border-color: #34d399; }
+.pb2 { height: 5px; background: #1e293b; border-radius: 9px; margin-bottom: 26px; }
+.pb2 i { display: block; height: 100%; background: #f59e0b; border-radius: 9px; transition: width .2s; }
+
+/* buttons (prototype uses <a>; React uses <button>) */
+.lbox button.btn { width: 100%; font: inherit; font-weight: 600; cursor: pointer; }
+.lbox .btn:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; }
+.btr { display: flex; gap: 10px; margin-top: 20px; }
+.btr .btn { flex: 1; margin: 0; box-shadow: none; }
+.btr .bk2 { border: 1px solid #334155; border-radius: 8px; padding: 11px 16px; font: inherit; font-size: 12px; font-weight: 600; background: #0c1220; color: inherit; cursor: pointer; }
+
+/* practice-area chips */
+.chp button { display: inline-block; border: 1px solid #334155; border-radius: 6px; padding: 5px 10px; font: inherit; font-size: 11px; margin: 0 6px 8px 0; background: #0c1220; color: inherit; cursor: pointer; }
+.chp button.on { border-color: #f59e0b; color: #f59e0b; }
+
+/* password strength */
+.str { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 6px 0; }
+.str i { height: 3px; background: #10b981; border-radius: 9px; }
+.str i.n { background: #334155; }
+
+/* checkboxes */
+.lbox .ck { display: flex; gap: 10px; font-size: 12px; margin: 14px 0; align-items: flex-start; }
+.lbox .ck input { width: auto; accent-color: #f59e0b; margin-top: 3px; }
+.lbox .ck label { margin: 0; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; color: inherit; }
+
+/* errors + banners */
+.lbox .fe { color: var(--r); font-size: 12px; margin-top: 4px; }
+.lbox [aria-invalid="true"] { border-color: var(--r); }
+.lbox .chp[data-invalid="true"] button:not(.on) { border-color: #f8717180; }
+.lbox .alert { border: 1px solid #f8717166; background: #f8717115; color: #fecaca; border-radius: 8px; padding: 10px 12px; font-size: 13px; margin: 14px 0 0; }
+
+/* keyboard focus */
+.lbox input:focus-visible, .lbox select:focus-visible, .lbox button:focus-visible, .lbox a:focus-visible,
+.pd a:focus-visible, .nav a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+/* success panel */
+.lbox .done-mark { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #34d39922; color: var(--ok); font-size: 22px; margin-bottom: 12px; }
+.lbox .done p { text-align: left; font-size: 14px; color: #cbd5e1; margin: 10px 0 0; }
+.lbox .done .btn { margin-top: 22px; }
+.lbox hr { border: 0; border-top: 1px solid #1e293b; margin: 20px 0 0; }
+.lbox .foot { font-size: 12px; margin-top: 12px; }
+.lbox .foot a { font-weight: 700; }
+.login .back:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }

@@ -1,0 +1,18 @@
+# Local PostgreSQL 18. schema.sql runs automatically on FIRST start of an empty volume.
+# To re-run it: docker compose down -v && docker compose up -d
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lawaid
+    ports:
+      - "5432:5432"
+    volumes:
+      - lawaid_pg:/var/lib/postgresql          # PG18 image: mount the parent dir
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      # Demo data. Includes the courts + practice areas the lawyer form needs (demo password: LawAid@123).
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+volumes:
+  lawaid_pg:

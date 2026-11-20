@@ -1,0 +1,16 @@
+/* Landing + role select. Mirrors the prototype's index.html portal directory. */
+.pd { min-height: calc(100vh - 70px); display: grid; place-items: center; padding: 32px 16px;
+  background: linear-gradient(#0a1a33e6, #0a1a33e6), url(/assets/img/hero/supreme-court-building.jpg) center/cover; }
+.pd .portal { width: min(760px, 92vw); text-align: center; }
+.pd h1 { margin: 10px 0 8px; font: 400 36px Georgia, serif; }
+.pd .portal > p { color: var(--mut); margin: 0 auto 28px; max-width: 46ch; }
+.pd .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.pd .ctas .btn { padding: 12px 22px; }
+.pd .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; text-align: center; }
+.pd .choices a { display: block; padding: 28px 20px; border: 1px solid #233a5e; border-radius: 16px; background: #13294a; }
+.pd .choices a:hover { border-color: #f59e0b; }
+.pd .choices b { display: block; font-size: 20px; color: #f59e0b; margin-bottom: 6px; }
+.pd .choices span { color: var(--mut); font-size: 14px; }
+.pd .already { margin-top: 24px; font-size: 13px; color: var(--mut); }
+.pd .already a { color: #fff; font-weight: 700; }
+@media (max-width: 600px) { .pd .choices { grid-template-columns: 1fr; } }
