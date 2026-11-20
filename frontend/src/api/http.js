@@ -1,35 +1,25 @@
 /**
  * LawAid HTTP layer.
  *
- * Integration note (integration/merge-all): both clients are kept and share ONE token store.
+ * Integration note (integration/merge-all): ONE login flow - Saker's cookie-based session
+ * (src/auth/AuthContext.jsx + src/api/client.js). The access token lives in memory
+ * (src/auth/tokenStore.js) and is renewed from the httpOnly refresh cookie.
  *  - default export `http`: Usama's axios instance (registration + reference data).
- *  - `authStorage` / `apiFetch`: Ahnaf's helpers (lawyer directory, admin verification).
- * Base URL: the backend has no /v1 prefix (see config/urls.py and docs/api), so the
- * default is `/api`; Vite proxies /api to Django in development.
+ *  - `authStorage` / `apiFetch`: Ahnaf's helpers (lawyer directory, admin verification),
+ *    now reading Saker's in-memory token instead of localStorage, and refreshing the
+ *    session once on a 401 like Saker's axios client.
+ * Base URL: the backend has no /v1 prefix, so the default is `/api` (Vite proxies it).
  */
 import axios from 'axios'
+import { getAccessToken, setAccessToken } from '../auth/tokenStore'
+import { authEvents, refreshSession } from './client'
 
-const TOKEN_KEY = 'lawaid_access_token'
-const USER_KEY = 'lawaid_user_data'
-
+// Ahnaf's token helper, backed by Saker's in-memory token store.
 export const authStorage = {
-  getToken: () => localStorage.getItem(TOKEN_KEY),
-  setToken: (token) => localStorage.setItem(TOKEN_KEY, token),
-  clearToken: () => localStorage.removeItem(TOKEN_KEY),
-  getUser: () => {
-    try {
-      const data = localStorage.getItem(USER_KEY)
-      return data ? JSON.parse(data) : null
-    } catch {
-      return null
-    }
-  },
-  setUser: (user) => localStorage.setItem(USER_KEY, JSON.stringify(user)),
-  clearUser: () => localStorage.removeItem(USER_KEY),
-  clearAll: () => {
-    localStorage.removeItem(TOKEN_KEY)
-    localStorage.removeItem(USER_KEY)
-  },
+  getToken: () => getAccessToken(),
+  setToken: (token) => setAccessToken(token),
+  clearToken: () => setAccessToken(null),
+  clearAll: () => setAccessToken(null),
 }
 
 // ---- Usama (SYS-18): axios instance ---------------------------------------
@@ -49,8 +39,7 @@ http.interceptors.request.use((config) => {
 export default http
 
 // ---- Ahnaf (SYS-21/22): fetch wrapper --------------------------------------
-export async function apiFetch(endpoint, options = {}) {
-  const url = endpoint.startsWith('http') || endpoint.startsWith('/') ? endpoint : `/api/${endpoint}`
+async function send(url, options) {
   const headers = { ...options.headers }
 
   const token = authStorage.getToken()
@@ -65,13 +54,22 @@ export async function apiFetch(endpoint, options = {}) {
     body = JSON.stringify(body)
   }
 
-  const config = {
-    ...options,
-    headers,
-    body,
-  }
+  return fetch(url, { ...options, headers, body })
+}
 
-  const response = await fetch(url, config)
+export async function apiFetch(endpoint, options = {}) {
+  const url = endpoint.startsWith('http') || endpoint.startsWith('/') ? endpoint : `/api/${endpoint}`
+
+  let response = await send(url, options)
+  if (response.status === 401) {
+    // Integration: renew the access token from Saker's refresh cookie once, then retry.
+    try {
+      await refreshSession()
+      response = await send(url, options)
+    } catch {
+      authEvents.dispatchEvent(new Event('expired'))
+    }
+  }
 
   // Parse response
   let data
@@ -83,11 +81,6 @@ export async function apiFetch(endpoint, options = {}) {
   }
 
   if (!response.ok) {
-    if (response.status === 401) {
-      // Auto-clear invalid credentials
-      authStorage.clearAll()
-      window.dispatchEvent(new CustomEvent('lawaid:auth_expired'))
-    }
     const error = new Error((data && data.detail) || response.statusText || 'Request failed')
     error.status = response.status
     error.data = data

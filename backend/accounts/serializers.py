@@ -353,3 +353,55 @@ class LawyerRegisterSerializer(BaseRegisterSerializer):
             ),
         )
         return data
+
+
+# ---------------------------------------------------------------------------
+# Saker (SYS-19): cookie-based login and the current-user payload
+# ---------------------------------------------------------------------------
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(trim_whitespace=False, write_only=True)
+    remember = serializers.BooleanField(required=False, default=True)
+    portal = serializers.ChoiceField(choices=["client", "lawyer", "admin"], required=False)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    Saker's user payload (login / refresh / me).
+    Integration note: extended with the fields Ahnaf's /api/auth/me/ view returned (phone, status,
+    is_admin and, for lawyers, verification_status / is_verified / bar_council_no / badge), because
+    /api/auth/me/ is now Saker's MeView and the frontend shows the verification badge from it.
+    """
+    is_admin = serializers.BooleanField(read_only=True)
+    verification_status = serializers.SerializerMethodField()
+    is_verified = serializers.SerializerMethodField()
+    bar_council_no = serializers.SerializerMethodField()
+    badge = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            "id", "full_name", "email", "role", "avatar_url", "preferred_language", "two_factor_enabled",
+            "phone", "status", "is_admin",
+            "verification_status", "is_verified", "bar_council_no", "badge",
+        ]
+
+    @staticmethod
+    def _lawyer_profile(user):
+        return getattr(user, "lawyer_profile", None) if user.role == UserRole.LAWYER else None
+
+    def get_verification_status(self, user):
+        profile = self._lawyer_profile(user)
+        return profile.verification_status if profile else None
+
+    def get_is_verified(self, user):
+        profile = self._lawyer_profile(user)
+        return profile.is_verified if profile else None
+
+    def get_bar_council_no(self, user):
+        profile = self._lawyer_profile(user)
+        return profile.bar_council_no if profile else None
+
+    def get_badge(self, user):
+        profile = self._lawyer_profile(user)
+        return profile.get_verification_badge() if profile else None

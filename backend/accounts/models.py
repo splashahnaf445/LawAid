@@ -82,6 +82,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_admin(self):
         return self.role == UserRole.ADMIN or self.is_staff or self.is_superuser
 
+    # Statuses allowed to sign in. Saker's login (SYS-19) allowed only 'active'; registration
+    # (Usama, SYS-18) creates lawyers as 'pending_verification', and they must be able to log in
+    # to see their verification status, so that status is allowed too.
+    SIGN_IN_STATUSES = (AccountStatus.ACTIVE, AccountStatus.PENDING_VERIFICATION)
+
+    @property
+    def can_sign_in(self):
+        """Saker (SYS-19): used by the cookie-based login / refresh / access-token checks."""
+        return self.status in self.SIGN_IN_STATUSES and self.deleted_at is None and self.is_active
+
 
 class ClientProfile(models.Model):
     """
@@ -116,3 +126,25 @@ class ClientProfile(models.Model):
 
     def __str__(self):
         return f"Client: {self.user.full_name}"
+
+
+class RefreshToken(models.Model):
+    """
+    Saker (SYS-19): refresh tokens issued by the cookie-based login (db/schema.sql: refresh_tokens).
+    Only a SHA-256 hash of each token is stored; rotation revokes the old row.
+
+    Integration note: on Saker's branch this was an unmanaged model pointing at his own
+    unmanaged User. It now references the shared User model and is created by migration
+    accounts.0004 like the other tables.
+    """
+    id = models.UUIDField(primary_key=True, default=generate_uuid, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id", related_name="+")
+    token_hash = models.TextField(unique=True)
+    user_agent = models.TextField(null=True, blank=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    expires_at = models.DateTimeField()
+    revoked_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "refresh_tokens"

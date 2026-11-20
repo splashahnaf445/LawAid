@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { LogIn, Lock, Mail, AlertCircle, ShieldCheck, UserCheck } from 'lucide-react';
 import AuthShell from '../components/AuthCard';
 import FormField from '../components/FormGroup';
-import { login } from '../api/auth';
+import { useAuth } from '../auth/AuthContext';
 import { extractErrorMessage } from '../utils/forms';
 
+// Integration note: Ahnaf's login page, now signing in through Saker's useAuth().login
+// (cookie-based session, the one login flow) instead of the localStorage token flow.
 export default function Login({ onLoginSuccess, onNavigate }) {
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,12 +25,12 @@ export default function Login({ onLoginSuccess, onNavigate }) {
     setError(null);
 
     try {
-      const response = await login(email, password);
+      const user = await login(email.trim(), password);
       if (onLoginSuccess) {
-        onLoginSuccess(response.user);
+        onLoginSuccess(user);
       }
     } catch (err) {
-      setError(extractErrorMessage(err.data, 'Invalid email or password.'));
+      setError(extractErrorMessage(err.response?.data, 'Invalid email or password.'));
     } finally {
       setLoading(false);
     }

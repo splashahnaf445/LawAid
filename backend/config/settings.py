@@ -91,6 +91,17 @@ if DATABASE_URL.startswith('postgres://') or DATABASE_URL.startswith('postgresql
             }
         }
     }
+elif os.environ.get('DB_NAME'):
+    # Saker (SYS-19, settings_append.py): separate DB_* variables instead of DATABASE_URL.
+    DATABASES = {'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'lawaid'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+        'OPTIONS': {'options': '-c search_path=lawaid,public'},
+    }}
 else:
     DATABASES = {
         'default': {
@@ -139,23 +150,50 @@ DOCUMENT_ENCRYPTION_KEY = os.getenv(
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ---------------------------------------------------------------------------
+# Saker (SYS-19): cookie-based JWT login - the main login flow used by the frontend.
+# Merged from backend/settings_append.py on his branch.
+# ---------------------------------------------------------------------------
+JWT_SIGNING_KEY = os.environ.get("JWT_SIGNING_KEY", SECRET_KEY)
+JWT_ISSUER = "lawaid"
+JWT_ACCESS_LIFETIME = timedelta(minutes=15)
+JWT_REFRESH_LIFETIME = timedelta(days=7)
+JWT_REFRESH_LIFETIME_SESSION = timedelta(days=1)
+JWT_REFRESH_REUSE_GRACE = timedelta(seconds=10)
+JWT_REFRESH_COOKIE = "lawaid_refresh"
+JWT_REFRESH_COOKIE_PATH = "/api/auth/"
+JWT_COOKIE_SECURE = not DEBUG
+JWT_COOKIE_SAMESITE = "Strict"
+
 # DRF configuration
 REST_FRAMEWORK = {
+    # Saker's authentication first (main flow); Ahnaf's SimpleJWT tokens from /api/auth/token/
+    # are still accepted (API contract), then Django session/basic auth for the admin site.
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'accounts.authentication.JWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+    # Saker: authenticated by default. Every public view sets AllowAny explicitly.
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    # Usama (SYS-18): registration views use ScopedRateThrottle(scope='register');
-    # the rate comes from REGISTER_THROTTLE_RATE in his .env.example.
     'DEFAULT_THROTTLE_RATES': {
+        # Usama (SYS-18): registration views use ScopedRateThrottle(scope='register');
+        # the rate comes from REGISTER_THROTTLE_RATE in his .env.example.
         'register': os.getenv('REGISTER_THROTTLE_RATE', '20/hour'),
+        # Saker (SYS-19)
+        'login': '10/min',
+        'refresh': '60/min',
     },
+    # Saker's settings_append.py also set "UNAUTHENTICATED_USER": None. It is not applied:
+    # Ahnaf's public lawyer views read request.user.is_authenticated, which fails on None.
 }
 
 SIMPLE_JWT = {
@@ -164,8 +202,18 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS: an allow-list (Usama's CORS_ALLOWED_ORIGINS / Saker's CORS_ORIGINS) instead of
+# allowing every origin, because the refresh cookie is sent with credentials.
+CORS_ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        'CORS_ALLOWED_ORIGINS',
+        os.environ.get('CORS_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000'),
+    ).split(',')
+    if origin.strip()
+]
 CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = ["Retry-After"]
 
 # ---------------------------------------------------------------------------
 # Email (SYS-20 / SRS FR-5 – Password Recovery)

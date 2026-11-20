@@ -10,6 +10,23 @@ This folder is the REST contract between the LawAid frontend (React) and backend
 
 **Where names come from:** `db/schema.sql` and `db/seed.sql` on `main`. All example data is fake and follows the seed's style.
 
+## Login flows after integration (`integration/merge-all`)
+
+The backend now has two token systems. **The main one, used by the frontend, is Saker's cookie-based login (SYS-19).**
+
+| | Main flow: Saker (SYS-19) | Kept for the API contract: Ahnaf's SimpleJWT (SYS-21/22) |
+|---|---|---|
+| Log in | `POST /api/auth/login/` with `{email, password, remember, portal}` returns `{access, user, access_expires_in}` and sets the httpOnly `lawaid_refresh` cookie | `POST /api/auth/token/` with `{email, password}` returns `{access, refresh, user}` |
+| Refresh | `POST /api/auth/refresh/`, no body, sends the cookie; needs the header `X-Requested-With: XMLHttpRequest` | `POST /api/auth/token/refresh/` with `{refresh}` |
+| Log out | `POST /api/auth/logout/` (this device) or `/api/auth/logout-all/` (every device); both need `X-Requested-With` | none (tokens expire) |
+| Current user | `GET /api/auth/me/` | same endpoint, which accepts both token types |
+| Access-token lifetime | 15 minutes, kept in memory only (never in `localStorage`) | 60 minutes |
+| Use it from | `useAuth()` in `frontend/src/auth/AuthContext.jsx`; API calls go through `frontend/src/api/client.js`, or `apiFetch` / `http` in `frontend/src/api/http.js` (they read the same token) | Postman, scripts and other API clients that follow `openapi.yaml` |
+
+- **Which tokens the backend accepts.** It authenticates with Saker's class first, then SimpleJWT, so a Bearer token from either flow works on protected endpoints.
+- **Who can sign in.** Accounts with status `active` or `pending_verification` can sign in through the main flow. New lawyers are `pending_verification` until an admin approves them; approval makes the account `active`.
+- **This file predates the integration.** The tables below were written for SYS-16, before the branches were merged. The changes since then are: the main login flow above; the lawyer verification paths moved to `/api/lawyers/verification/...` (PR #7); and courts and practice areas are at `/api/reference/courts/` and `/api/reference/practice-areas/`. `openapi.yaml` still needs updating to match.
+
 ## How to view it
 
 - **Swagger Editor (no install).** Open <https://editor.swagger.io>, then *File → Import file* and pick `docs/api/openapi.yaml`.
@@ -242,6 +259,8 @@ Every operation carries these extension fields:
 | POST | `/api/ai/recommendations/` | AI lawyer recommendation | client | unassigned | SYS-26 | planned |
 
 ## Frontend differences
+
+> **Status after `integration/merge-all`:** the frontend now uses Saker's cookie-based login as the main flow (see [Login flows](#login-flows-after-integration-integrationmerge-all)), so the login, refresh and logout rows below no longer apply. The bugs in the auth header, refresh handler, imports and events rows were fixed during the integration. The table is kept as the SYS-16 record.
 
 These come from the React client on `feature/LAW-12-modular-architecture` (`frontend/src/api/client.js`, `authentication/AuthContect.jsx`). Where a backend implementation exists, the contract follows the backend. The client needs these changes to work with it:
 

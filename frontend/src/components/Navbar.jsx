@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { logout } from '../api/auth'
-import { authStorage } from '../api/http'
+import { useAuth } from '../auth/AuthContext'
 import VerifiedBadge from './VerifiedBadge.jsx'
 
 /**
@@ -9,23 +7,8 @@ import VerifiedBadge from './VerifiedBadge.jsx'
  * Integration note (integration/merge-all): Usama's navbar (prototype styling) with the
  * navigation and signed-in user status from Ahnaf's navbar: lawyer directory, admin
  * verification queue, "Lawyer join", user name + role / verification badge, sign out.
+ * The user comes from Saker's useAuth() - the one login flow.
  */
-function useStoredUser() {
-  const [user, setUser] = useState(() => authStorage.getUser())
-  useEffect(() => {
-    const refresh = () => setUser(authStorage.getUser())
-    window.addEventListener('lawaid:auth_changed', refresh)
-    window.addEventListener('lawaid:auth_expired', refresh)
-    window.addEventListener('storage', refresh)
-    return () => {
-      window.removeEventListener('lawaid:auth_changed', refresh)
-      window.removeEventListener('lawaid:auth_expired', refresh)
-      window.removeEventListener('storage', refresh)
-    }
-  }, [])
-  return user
-}
-
 function UserStatus({ user }) {
   if (user.role === 'admin' || user.is_admin) return <span className="pill">Admin</span>
   if (user.role === 'client') return <span className="pill g">Client</span>
@@ -37,12 +20,12 @@ function UserStatus({ user }) {
 }
 
 export default function Navbar() {
-  const user = useStoredUser()
+  const { user, logout } = useAuth()
   const navigate = useNavigate()
   const linkClass = ({ isActive }) => (isActive ? 'on' : undefined)
 
-  function signOut() {
-    logout()
+  async function signOut() {
+    await logout()
     navigate('/')
   }
 
