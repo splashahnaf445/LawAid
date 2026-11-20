@@ -1,16 +1,25 @@
 """
-Validation rules for registration (SYS-18 / FR-1).
+Validation rules for registration (SYS-18 / FR-1) and verification documents (SYS-21 / FR-2).
 
 The core rules are plain functions with no Django dependency so they are easy to
 unit-test and to mirror in the frontend (frontend/src/utils/validators.js).
+
+Integration note: Usama's rules (normalize_bd_phone, normalize_bar_council_no, names,
+password complexity) are the registration rules; Ahnaf's Django-style validators
+(validate_bd_phone, validate_bar_council_no, validate_verification_document) are kept
+for document upload and his tests. Only one normalize_bd_phone can exist: Usama's
+stricter version is used (it rejects invalid numbers instead of returning them).
 """
 import re
+
+from django.core.exceptions import ValidationError
 
 # ---------------------------------------------------------------------------
 # Phone  (DB CHECK: ^\+8801[3-9][0-9]{8}$)
 # ---------------------------------------------------------------------------
 _PHONE_SEPARATORS = re.compile(r"[\s\-().]")
 _BD_MOBILE_TAIL = re.compile(r"1[3-9][0-9]{8}")
+BD_PHONE_REGEX = re.compile(r'^\+8801[3-9][0-9]{8}$')
 
 
 def normalize_bd_phone(raw: str) -> str:
@@ -29,12 +38,25 @@ def normalize_bd_phone(raw: str) -> str:
     return "+880" + tail
 
 
+def validate_bd_phone(value: str):
+    """Django-style validator (Ahnaf, SYS-21) built on Usama's normalize_bd_phone."""
+    try:
+        normalized = normalize_bd_phone(value)
+    except ValueError:
+        normalized = None
+    if not normalized or not BD_PHONE_REGEX.match(normalized):
+        raise ValidationError(
+            f"'{value}' is not a valid Bangladeshi mobile number. Format must be +8801XXXXXXXXX."
+        )
+
+
 # ---------------------------------------------------------------------------
 # Bar Council number.  Formats in the project data: SC-7841, DH-10492, BC-2018-9412
 # Change BAR_COUNCIL_RE here (and in the frontend validators.js) if the real
 # Bar Council format differs.
 # ---------------------------------------------------------------------------
 BAR_COUNCIL_RE = re.compile(r"[A-Z]{2,5}-(?:[0-9]{4}-)?[0-9]{3,6}")
+BAR_COUNCIL_REGEX = re.compile(r'^[A-Za-z0-9\-\/]{3,30}$')
 
 
 def normalize_bar_council_no(raw: str) -> str:
@@ -42,6 +64,15 @@ def normalize_bar_council_no(raw: str) -> str:
     if not BAR_COUNCIL_RE.fullmatch(s):
         raise ValueError("Enter a valid Bar Council number, e.g. SC-7841 or BC-2018-9412.")
     return s
+
+
+def validate_bar_council_no(value: str):
+    """Ahnaf (SYS-21): permissive character check, kept for existing callers and tests."""
+    cleaned = value.strip().upper()
+    if not BAR_COUNCIL_REGEX.match(cleaned):
+        raise ValidationError(
+            f"'{value}' is not a valid Bar Council ID format. Allowed characters: letters, digits, dash, slash."
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -88,11 +119,37 @@ class PasswordComplexityValidator:
     """Django AUTH_PASSWORD_VALIDATORS entry. Length is enforced by MinimumLengthValidator."""
 
     def validate(self, password, user=None):
-        from django.core.exceptions import ValidationError
-
         problems = password_problems(password)
         if problems:
             raise ValidationError(problems, code="password_too_simple")
 
     def get_help_text(self):
         return "Your password must include upper and lower case letters, a number and a special character."
+
+
+# ---------------------------------------------------------------------------
+# Verification documents (Ahnaf, SYS-21 / FR-2, NFR-4)
+# ---------------------------------------------------------------------------
+ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
+MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024  # 15 MB
+
+
+def validate_verification_document(file_obj):
+    """
+    Validates uploaded file format and size for NID and Bar Council Certificate (FR-2).
+    """
+    if not file_obj:
+        raise ValidationError("File is required.")
+
+    filename = getattr(file_obj, 'name', '')
+    ext = filename.split('.')[-1].lower() if '.' in filename else ''
+    if ext not in ALLOWED_EXTENSIONS:
+        raise ValidationError(
+            f"Unsupported file type (.{ext}). Allowed formats are PDF, PNG, JPG, and JPEG."
+        )
+
+    file_size = getattr(file_obj, 'size', 0)
+    if file_size > MAX_FILE_SIZE_BYTES:
+        raise ValidationError(
+            f"File size exceeds maximum limit of 15MB (file size: {file_size / (1024*1024):.2f}MB)."
+        )

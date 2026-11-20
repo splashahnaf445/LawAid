@@ -1,8 +1,14 @@
 # Local PostgreSQL 18. schema.sql runs automatically on FIRST start of an empty volume.
 # To re-run it: docker compose down -v && docker compose up -d
+#
+# `docker compose up -d` starts only the database (Usama's setup).
+# The backend/frontend containers (Ahnaf) are opt-in: `docker compose --profile app up -d`.
+# They need backend/Dockerfile and frontend/Dockerfile, which are not in the repo yet.
 services:
   db:
     image: postgres:18
+    container_name: lawaid_db
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -14,5 +20,50 @@ services:
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
       # Demo data. Includes the courts + practice areas the lawyer form needs (demo password: LawAid@123).
       - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lawaid"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    profiles: ["app"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lawaid_backend
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+      - encrypted_docs:/app/storage/encrypted_documents
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-lawaid-dev-key-2026
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/lawaid
+      - DOCUMENT_ENCRYPTION_KEY=c1nwgexw36iltaDC_aCA64MHK2AkBmvxoJK0YdQ4GZY=
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    profiles: ["app"]
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lawaid_frontend
+    restart: always
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
 volumes:
   lawaid_pg:
+  encrypted_docs:

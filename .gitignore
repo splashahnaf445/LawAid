@@ -4,19 +4,29 @@
 
 # ---- Python / Django ----
 __pycache__/
+**/__pycache__/
 *.py[cod]
+*$py.class
 .venv/
 venv/
+**/venv/
 *.sqlite3
 staticfiles/
 media/
+backend/media/
+storage/
+backend/storage/
 .pytest_cache/
 .coverage
 htmlcov/
 
 # ---- Node / React / Vite ----
 node_modules/
+**/node_modules/
 dist/
+build/
+out/
+.next/
 .vite/
 *.local
 npm-debug.log*
