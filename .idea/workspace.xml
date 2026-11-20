@@ -2,11 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="724a0260-ac39-4935-87e5-a9bd08170620" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/lawyers/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/lawyers/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/lawyers/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/lawyers/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/lawyers/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/lawyers/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/accounts/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/accounts/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/accounts/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/config/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/core/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/lawyers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/managers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/managers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/tests/test_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/tests/test_registration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/tests/test_validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/tests/test_validators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/validators.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/validators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,26 +42,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/UIU/8th Trimester/Software Engineering Lab/Project/Project Git/LawAid/backend/reviews&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "F:/UIU/8th Trimester/Software Engineering Lab/Project/Project Git/LawAid/backend/lawyers"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\reviews" />
-      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\platform" />
-      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\payments" />
-      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\messaging" />
-      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\cases" />
+      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\lawyers" />
+      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\core" />
+      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\config" />
+      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\accounts\migrations" />
+      <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\backend\accounts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\UIU\8th Trimester\Software Engineering Lab\Project\Project Git\LawAid\db" />
