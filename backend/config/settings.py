@@ -144,7 +144,7 @@ os.makedirs(ENCRYPTED_DOCUMENTS_DIR, exist_ok=True)
 
 # Master encryption key
 DOCUMENT_ENCRYPTION_KEY = os.getenv(
-    'DOCUMENT_ENCRYPTION_KEY', 
+    'DOCUMENT_ENCRYPTION_KEY',
     'c1nwgexw36iltaDC_aCA64MHK2AkBmvxoJK0YdQ4GZY='
 )
 
