@@ -5,6 +5,8 @@ import App from './App.jsx'
 import './styles/base.css'
 import './styles/auth.css'
 import './styles/landing.css'
+// Ahnaf's verification pages (scoped to .lv - see the file header)
+import './styles/verification.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -10,7 +10,7 @@ import {
 } from '../utils/validators'
 
 const INITIAL = {
-  full_name: '', email: '', phone: '', password: '', password_confirm: '',
+  full_name: '', email: '', phone: '', address: '', password: '', password_confirm: '',
   preferred_language: 'en', accept_terms: false,
 }
 const FIELDS = Object.keys(INITIAL)
@@ -67,6 +67,7 @@ export default function RegisterClient() {
         full_name: values.full_name.trim(),
         email: values.email.trim(),
         phone: values.phone.trim() || undefined,
+        address: values.address.trim(),  // Ahnaf (SYS-21): optional address
       }
       setCreated(await registerClient(payload))
     } catch (err) {
@@ -104,6 +105,9 @@ export default function RegisterClient() {
           value={values.email} onChange={onChange} error={errors.email} />
         <FormField id="phone" label="Mobile number (optional)" type="tel" placeholder="+880 1712-345678" autoComplete="tel"
           hint="Used for appointment reminders." value={values.phone} onChange={onChange} error={errors.phone} />
+        {/* Ahnaf (SYS-21): optional address, stored on client_profiles.address */}
+        <FormField id="address" label="Address (optional)" placeholder="e.g. Dhanmondi, Dhaka" autoComplete="street-address"
+          value={values.address} onChange={onChange} error={errors.address} />
         <FormField id="password" label="Password" type="password" autoComplete="new-password"
           value={values.password} onChange={onChange} error={errors.password}
           hint="At least 8 characters with upper and lower case letters, a number and a special character." />
