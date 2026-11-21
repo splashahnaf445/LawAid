@@ -12,6 +12,7 @@ from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from .authentication import NoAuth
 from .models import User
 from .serializers import (
     ClientRegisterSerializer,
@@ -102,7 +103,7 @@ def _session(user, access, refresh, remember=True):
 
 
 class LoginView(APIView):
-    authentication_classes, permission_classes = [], [AllowAny]
+    authentication_classes, permission_classes = [NoAuth], [AllowAny]
     throttle_classes, throttle_scope = [ScopedRateThrottle], "login"
 
     def post(self, request):
@@ -128,13 +129,13 @@ class LoginView(APIView):
             raise PermissionDenied({"detail": f"This is a {user.role} account. Please use the {user.role} portal.",
                                     "code": "wrong_portal"})
         remember = s.validated_data["remember"]
-        User.objects.filter(pk=user.pk).update(last_login_at=timezone.now())
+        User.objects.filter(pk=user.pk).update(last_login=timezone.now())
         access, refresh = issue_token_pair(user, *_meta(request), remember=remember)
         return _session(user, access, refresh, remember)
 
 
 class RefreshView(APIView):
-    authentication_classes, permission_classes = [], [AllowAny]
+    authentication_classes, permission_classes = [NoAuth], [AllowAny]
     throttle_classes, throttle_scope = [ScopedRateThrottle], "refresh"
 
     def post(self, request):
@@ -153,7 +154,7 @@ class RefreshView(APIView):
 
 
 class LogoutView(APIView):
-    authentication_classes, permission_classes = [], [AllowAny]
+    authentication_classes, permission_classes = [NoAuth], [AllowAny]
 
     def post(self, request):
         _require_xhr(request)

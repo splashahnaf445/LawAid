@@ -63,6 +63,18 @@ class LawyerSearchView(APIView):
         if specialization:
             queryset = queryset.filter(specialization__icontains=specialization)
 
+        # Filters the frontend (src/api/lawyers.js) sends: court name, practice-area slug/name.
+        court = request.query_params.get('court', '').strip()
+        if court:
+            queryset = queryset.filter(primary_court__name__icontains=court)
+
+        practice_area = request.query_params.get('practice_area', '').strip()
+        if practice_area:
+            queryset = queryset.filter(
+                Q(practice_areas__slug__iexact=practice_area) |
+                Q(practice_areas__name_en__icontains=practice_area)
+            ).distinct()
+
         serializer = LawyerSearchSerializer(queryset, many=True, context={'request': request})
         return Response({
             'count': len(serializer.data),

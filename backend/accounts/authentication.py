@@ -24,4 +24,20 @@ class JWTAuthentication(BaseAuthentication):
             raise AuthenticationFailed({"detail": e.message, "code": e.code})
 
     def authenticate_header(self, request):
-        return "Bearer"    
+        return "Bearer"
+
+
+class NoAuth(BaseAuthentication):
+    """
+    For public auth endpoints (login / refresh / logout).
+
+    With `authentication_classes = []` DRF has no WWW-Authenticate header to send, so it
+    silently turns every AuthenticationFailed (401) into a 403. This class never
+    authenticates anyone but gives DRF the header, so failures stay 401.
+    """
+
+    def authenticate(self, request):
+        return None
+
+    def authenticate_header(self, request):
+        return "Bearer"

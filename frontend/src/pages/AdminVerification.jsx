@@ -166,7 +166,7 @@ export default function AdminVerification({ currentUser, onNavigate, onLoginAsAd
               onClick={onLoginAsAdmin}
             >
               <ClipboardCheck size={18} />
-              <span>Sign In as Platform Admin (admin@lawaid.gov.bd)</span>
+              <span>Sign In as Platform Admin (rahid.karim@lawaid.com.bd)</span>
             </button>
           </div>
 

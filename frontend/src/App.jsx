@@ -79,7 +79,7 @@ function AppRoutes() {
   // Ahnaf: demo "log in as admin" button on the verification page.
   const handleLoginAsAdmin = async () => {
     try {
-      handleLoginSuccess(await login('admin@lawaid.gov.bd', 'AdminPass123!'))
+      handleLoginSuccess(await login('rahid.karim@lawaid.com.bd', 'LawAid@123'))
     } catch {
       alert('Could not auto-login as admin. Please sign in via the login page.')
       navigate('/login')

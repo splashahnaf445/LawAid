@@ -9,8 +9,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(os.path.join(BASE_DIR, '.env'))
 dotenv.load_dotenv(os.path.join(BASE_DIR.parent, '.env'))
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-lawaid-dev-key-2026')
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't')
+SECRET_KEY = os.getenv('SECRET_KEY') or ('django-insecure-lawaid-dev-key-2026' if DEBUG else None)
+if not SECRET_KEY:
+    from django.core.exceptions import ImproperlyConfigured
+    raise ImproperlyConfigured('SECRET_KEY must be set when DEBUG is off.')
 ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '*').split(',') if h.strip()]
 
 # Modular Django apps for LawAid
@@ -112,6 +115,10 @@ else:
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",   # new passwords
+    "django.contrib.auth.hashers.BCryptPasswordHasher",   # seed.sql hashes (needs: pip install bcrypt)
+]
 
 # Custom Test Runner (handles raw SQL schema & unmanaged models)
 TEST_RUNNER = 'config.test_runner.LawAidTestRunner'
@@ -143,10 +150,15 @@ ENCRYPTED_DOCUMENTS_DIR = os.path.join(BASE_DIR, 'storage', 'encrypted_documents
 os.makedirs(ENCRYPTED_DOCUMENTS_DIR, exist_ok=True)
 
 # Master encryption key
-DOCUMENT_ENCRYPTION_KEY = os.getenv(
-    'DOCUMENT_ENCRYPTION_KEY',
-    'c1nwgexw36iltaDC_aCA64MHK2AkBmvxoJK0YdQ4GZY='
-)
+# The old default key was published in the repo, so anyone could decrypt the NID / Bar
+# certificate uploads. Generate your own: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+DOCUMENT_ENCRYPTION_KEY = os.getenv('DOCUMENT_ENCRYPTION_KEY')
+if not DOCUMENT_ENCRYPTION_KEY:
+    if DEBUG:
+        DOCUMENT_ENCRYPTION_KEY = 'c1nwgexw36iltaDC_aCA64MHK2AkBmvxoJK0YdQ4GZY='  # dev only
+    else:
+        from django.core.exceptions import ImproperlyConfigured
+        raise ImproperlyConfigured('DOCUMENT_ENCRYPTION_KEY must be set when DEBUG is off.')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

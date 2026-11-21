@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from core.ids import generate_uuid
 from accounts.models import User
+from .fields import ConsultationFormatsField
 
 class VerificationStatus(models.TextChoices):
     PENDING = 'pending', 'Pending Verification'
@@ -63,7 +64,7 @@ class LawyerProfile(models.Model):
     specialization = models.CharField(max_length=255, default='Civil Litigation, Property Law')
     consultation_fee = models.DecimalField(max_digits=10, decimal_places=2, default=1000.00)
     session_minutes = models.PositiveSmallIntegerField(default=30)
-    formats = models.CharField(max_length=100, default='video,audio,chat')
+    formats = ConsultationFormatsField(max_length=100, default='video,audio,chat')
     offers_free_session = models.BooleanField(default=False)
     sos_available = models.BooleanField(default=False)
     # Usama (SYS-18): practice areas chosen at registration (db/schema.sql: lawyer_practice_areas)
@@ -83,11 +84,12 @@ class LawyerProfile(models.Model):
     )
     verified_at = models.DateTimeField(null=True, blank=True)
     verified_by = models.ForeignKey(
-        User, 
-        null=True, 
-        blank=True, 
-        on_delete=models.SET_NULL, 
-        related_name='verified_lawyers'
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='verified_lawyers',
+        db_column='verified_by',
     )
     rejection_reason = models.TextField(null=True, blank=True)
 
@@ -155,11 +157,12 @@ class LawyerVerificationDocument(models.Model):
     
     submitted_at = models.DateTimeField(auto_now_add=True)
     reviewed_by = models.ForeignKey(
-        User, 
-        null=True, 
-        blank=True, 
-        on_delete=models.SET_NULL, 
-        related_name='reviewed_documents'
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='reviewed_documents',
+        db_column='reviewed_by',
     )
     reviewed_at = models.DateTimeField(null=True, blank=True)
 

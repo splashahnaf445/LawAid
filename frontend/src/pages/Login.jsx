@@ -106,37 +106,37 @@ export default function Login({ onLoginSuccess, onNavigate }) {
           <button
             type="button"
             className="btn-demo"
-            onClick={() => handleDemoFill('admin@lawaid.gov.bd', 'AdminPass123!')}
+            onClick={() => handleDemoFill('rahid.karim@lawaid.com.bd', 'LawAid@123')}
           >
             <strong>Platform Admin</strong>
-            <span className="role-tag">admin@lawaid.gov.bd</span>
+            <span className="role-tag">rahid.karim@lawaid.com.bd</span>
           </button>
 
           <button
             type="button"
             className="btn-demo"
-            onClick={() => handleDemoFill('tariq.rahman@lawyer.lawaid.com', 'LawyerPass123!')}
+            onClick={() => handleDemoFill('rafiqul.islam@lawaid.com.bd', 'LawAid@123')}
           >
             <strong>Verified Lawyer</strong>
-            <span className="role-tag">tariq.rahman@lawyer.lawaid.com</span>
+            <span className="role-tag">rafiqul.islam@lawaid.com.bd</span>
           </button>
 
           <button
             type="button"
             className="btn-demo"
-            onClick={() => handleDemoFill('sumaiya.akter@lawyer.lawaid.com', 'LawyerPass123!')}
+            onClick={() => handleDemoFill('farhan.chowdhury@example.com', 'LawAid@123')}
           >
             <strong>Pending Lawyer</strong>
-            <span className="role-tag">sumaiya.akter@... (Pending)</span>
+            <span className="role-tag">farhan.chowdhury@... (Pending)</span>
           </button>
 
           <button
             type="button"
             className="btn-demo"
-            onClick={() => handleDemoFill('rahim.ahmed@example.com', 'ClientPass123!')}
+            onClick={() => handleDemoFill('ahnaf.shahriar@example.com', 'LawAid@123')}
           >
             <strong>Standard Client</strong>
-            <span className="role-tag">rahim.ahmed@example.com</span>
+            <span className="role-tag">ahnaf.shahriar@example.com</span>
           </button>
         </div>
       </div>
