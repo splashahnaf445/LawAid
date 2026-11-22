@@ -24,3 +24,7 @@ npm run dev
 cd backend
 source .venv/bin/activate             # Windows: .venv\Scripts\activate
 python manage.py runserver
+
+#check if every connection ok or not 
+python manage.py showmigrations
+python manage.py check
